@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tonoy Chakraborty — Lead Unity Developer</title>
+<meta name="description" content="Lead Unity Developer based in Hanoi. 9+ years in mobile game development, cross-platform porting and live-ops."/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:    #0a192f;
+  --navy2:   #112240;
+  --navy3:   #1d3461;
+  --teal:    #64ffda;
+  --teal-dim:rgba(100,255,218,0.1);
+  --text:    #ccd6f6;
+  --muted:   #8892b0;
+  --white:   #e6f1ff;
+  --border:  rgba(100,255,218,0.1);
+  --font:    'Inter', sans-serif;
+  --mono:    'Fira Code', monospace;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--navy);color:var(--muted);min-height:100vh;overflow-x:hidden;line-height:1.6}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--teal-dim);color:var(--teal)}
+
+/* ── LAYOUT ─────────────────────────── */
+.container{
+  display:grid;
+  grid-template-columns:minmax(320px,400px) 1fr;
+  max-width:1200px;
+  margin:0 auto;
+  min-height:100vh;
+  padding:0 5vw;
+}
+
+/* ── LEFT ───────────────────────────── */
+.left{
+  position:sticky;
+  top:0;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  padding:6rem 0 4rem;
+}
+.intro-tag{font-family:var(--mono);font-size:0.8rem;color:var(--teal);margin-bottom:1.1rem;letter-spacing:.05em}
+.left h1{font-size:clamp(2rem,3vw,2.8rem);font-weight:600;color:var(--white);letter-spacing:-.02em;line-height:1.1;margin-bottom:.55rem}
+.left h2{font-size:1.1rem;font-weight:400;color:var(--muted);margin-bottom:1.25rem}
+.left p{font-size:.88rem;line-height:1.8;max-width:300px;color:var(--muted)}
+
+.sidenav{margin-top:2.5rem;display:flex;flex-direction:column;gap:.2rem}
+.sidenav a{display:flex;align-items:center;gap:.85rem;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:.35rem 0;transition:color .2s;width:fit-content}
+.sidenav a .nl{width:36px;height:1px;background:var(--muted);transition:width .25s,background .25s;flex-shrink:0}
+.sidenav a:hover,.sidenav a.active{color:var(--white)}
+.sidenav a:hover .nl,.sidenav a.active .nl{width:64px;background:var(--teal)}
+
+.socials{display:flex;gap:1.1rem;align-items:center}
+.socials a{color:var(--muted);transition:color .2s;display:flex}
+.socials a:hover{color:var(--teal)}
+.socials svg{width:19px;height:19px;fill:currentColor}
+
+/* ── RIGHT ──────────────────────────── */
+.right{padding:6rem 0 6rem 5rem;display:flex;flex-direction:column;gap:6rem}
+
+.sec-label{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--teal);margin-bottom:.6rem}
+.sec-title{font-size:1.5rem;font-weight:600;color:var(--white);margin-bottom:.5rem;letter-spacing:-.01em}
+.sec-sub{font-size:.85rem;color:var(--muted);margin-bottom:2rem;max-width:480px;line-height:1.7}
+
+/* ── SKILLS SECTION ─────────────────── */
+.skills-legend{
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  margin-bottom:1.75rem;
+  flex-wrap:wrap;
+}
+.legend-item{
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  font-family:var(--mono);
+  font-size:.68rem;
+  color:var(--muted);
+}
+.legend-solid{
+  width:32px;height:1px;
+  background:var(--teal);
+  border:1px solid var(--teal);
+}
+.legend-dashed{
+  width:32px;height:0;
+  border-top:1px dashed rgba(100,255,218,.5);
+}
+
+.skill-group{margin-bottom:1.5rem}
+.skill-group-label{
+  font-family:var(--mono);
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--muted);
+  margin-bottom:.65rem;
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+
+/* solid = proficient */
+.tag{
+  font-family:var(--mono);
+  font-size:.72rem;
+  color:var(--teal);
+  border:1px solid rgba(100,255,218,.35);
+  padding:.25rem .75rem;
+  border-radius:3px;
+  background:var(--teal-dim);
+  transition:border-color .2s, background .2s;
+}
+.tag:hover{border-color:var(--teal);background:rgba(100,255,218,.15)}
+
+/* dashed = some experience */
+.tag-dim{
+  font-family:var(--mono);
+  font-size:.72rem;
+  color:rgba(100,255,218,.45);
+  border:1px dashed rgba(100,255,218,.25);
+  padding:.25rem .75rem;
+  border-radius:3px;
+  background:transparent;
+  transition:border-color .2s, color .2s;
+}
+.tag-dim:hover{border-color:rgba(100,255,218,.5);color:rgba(100,255,218,.7)}
+
+/* ── SOFT SKILLS ────────────────────── */
+.soft-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
+  gap:.75rem;
+  margin-top:.25rem;
+}
+.soft-card{
+  background:var(--navy2);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:.85rem 1rem;
+  transition:border-color .2s, background .2s;
+}
+.soft-card:hover{border-color:rgba(100,255,218,.25);background:var(--navy3)}
+.soft-icon{font-size:1.2rem;margin-bottom:.4rem}
+.soft-name{font-size:.82rem;color:var(--white);font-weight:500;margin-bottom:.2rem}
+.soft-desc{font-size:.72rem;color:var(--muted);line-height:1.6}
+
+/* ── FEATURED PROFESSIONAL CARDS ────── */
+.featured-list{display:flex;flex-direction:column;gap:.75rem}
+
+.feat-card{
+  border:1px solid var(--border);
+  border-radius:8px;
+  margin-bottom:.75rem;
+  overflow:hidden;
+  transition:border-color .2s;
+  cursor:pointer;
+  background:var(--navy2);
+}
+.feat-card:hover{border-color:rgba(100,255,218,.25)}
+.feat-card.open{border-color:rgba(100,255,218,.35)}
+
+/* summary row — always visible */
+.feat-summary{
+  display:grid;
+  grid-template-columns:140px 1fr auto;
+  gap:1.5rem;
+  align-items:center;
+  padding:1.25rem 1.5rem;
+  transition:background .2s;
+}
+.feat-card:hover .feat-summary{background:#16213a}
+.feat-card.open .feat-summary{background:#16213a}
+
+.feat-thumb{
+  border-radius:5px;overflow:hidden;border:2px solid var(--navy3);
+  aspect-ratio:16/10;background:var(--navy2);transition:border-color .2s;flex-shrink:0;
+}
+.feat-card.open .feat-thumb,.feat-card:hover .feat-thumb{border-color:rgba(100,255,218,.2)}
+.feat-thumb img{width:100%;height:100%;object-fit:cover;opacity:.75;transition:opacity .2s;display:block}
+.feat-card:hover .feat-thumb img,.feat-card.open .feat-thumb img{opacity:1}
+.feat-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem}
+
+.feat-company{font-family:var(--mono);font-size:.65rem;color:var(--teal);letter-spacing:.08em;margin-bottom:.35rem}
+.feat-title{font-size:.97rem;font-weight:600;color:var(--white);margin-bottom:.5rem;line-height:1.3;transition:color .2s}
+.feat-card:hover .feat-title,.feat-card.open .feat-title{color:var(--teal)}
+.feat-desc{font-size:.8rem;line-height:1.65;color:var(--muted);margin-bottom:.6rem}
+.feat-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.feat-tag{font-family:var(--mono);font-size:.64rem;color:var(--teal)}
+
+.feat-chevron{color:var(--muted);display:flex;align-items:center;flex-shrink:0;transition:color .2s}
+.feat-chevron svg{width:20px;height:20px;transition:transform .3s}
+.feat-card.open .feat-chevron svg{transform:rotate(180deg)}
+.feat-card.open .feat-chevron{color:var(--teal)}
+
+/* expand panel */
+.feat-expand{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+.feat-card.open .feat-expand{max-height:1000px}
+
+.feat-expand-inner{
+  padding:0 1.5rem 1.75rem;
+  border-top:1px solid var(--border);
+  margin-top:0;
+}
+.feat-role-badge{
+  display:inline-flex;
+  font-family:var(--mono);
+  font-size:.68rem;
+  color:var(--teal);
+  background:var(--teal-dim);
+  border:1px solid rgba(100,255,218,.2);
+  padding:.25rem .75rem;
+  border-radius:50px;
+  margin:1rem 0 1.1rem;
+}
+.feat-expand-cols{
+  display:flex;
+  flex-direction:column;
+  gap:1.25rem;
+}
+.feat-expand-label{
+  font-family:var(--mono);
+  font-size:.65rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--muted);
+  margin-bottom:.6rem;
+}
+.feat-expand-list{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.feat-expand-list li{
+  font-size:.82rem;
+  color:var(--muted);
+  line-height:1.65;
+  padding-left:1rem;
+  position:relative;
+}
+.feat-expand-list li::before{content:'▹';position:absolute;left:0;color:var(--teal);font-size:.7rem;top:.15rem}
+.feat-expand-links{margin-top:1.1rem;display:flex;gap:1rem}
+.feat-expand-links a{
+  font-family:var(--mono);font-size:.75rem;color:var(--teal);
+  border:1px solid rgba(100,255,218,.25);padding:.3rem .85rem;border-radius:4px;
+  transition:background .2s;
+}
+.feat-expand-links a:hover{background:var(--teal-dim)}
+
+/* impact stats row */
+.feat-impacts{
+  display:flex;flex-wrap:wrap;gap:.75rem;
+  margin-bottom:1.25rem;
+}
+.feat-impact-item{
+  display:flex;align-items:baseline;gap:.6rem;
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:6px;padding:.6rem .9rem;flex:1;min-width:160px;
+}
+.feat-impact-num{
+  font-family:var(--mono);font-size:1.1rem;font-weight:600;
+  color:var(--teal);white-space:nowrap;flex-shrink:0;
+}
+.feat-impact-label{font-size:.75rem;color:var(--muted);line-height:1.5}
+
+/* ── SHOW MORE ──────────────────────── */
+.show-more-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--mono);font-size:.78rem;color:var(--teal);
+  border:1px solid var(--teal);padding:.55rem 1.25rem;border-radius:4px;
+  margin-top:1.75rem;cursor:pointer;background:none;transition:background .2s;
+}
+.show-more-btn:hover{background:var(--teal-dim)}
+.show-more-btn svg{width:14px;height:14px;fill:currentColor;transition:transform .25s}
+.show-more-btn.open svg{transform:rotate(180deg)}
+.more-list{display:none;flex-direction:column;margin-top:1.25rem;border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.more-list.open{display:flex}
+.more-item{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--border);transition:background .2s;gap:1rem}
+.more-item:last-child{border-bottom:none}
+.more-item:hover{background:var(--navy2)}
+.more-name{font-size:.88rem;color:var(--white);font-weight:500}
+.more-company{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.more-links{display:flex;gap:.75rem;flex-shrink:0}
+.more-links a{color:var(--muted);font-family:var(--mono);font-size:.72rem;display:flex;align-items:center;gap:.35rem;transition:color .2s;white-space:nowrap}
+.more-links a:hover{color:var(--teal)}
+.more-links svg{width:13px;height:13px;fill:currentColor}
+
+/* ── PERSONAL GRID ──────────────────── */
+.personal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.pers-card{background:var(--navy2);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
+.pers-card:hover{border-color:rgba(100,255,218,.3);transform:translateY(-4px)}
+.pers-thumb{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--navy3)}
+.pers-thumb img{width:100%;height:100%;object-fit:cover;opacity:.75;transition:opacity .2s;display:block}
+.pers-card:hover .pers-thumb img{opacity:1}
+.pers-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.pers-body{padding:1rem 1.1rem;flex:1;display:flex;flex-direction:column}
+.pers-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem}
+.pers-folder{width:34px;height:34px;fill:var(--teal)}
+.pers-links-top{display:flex;gap:.65rem}
+.pers-links-top a{color:var(--muted);transition:color .2s;display:flex}
+.pers-links-top a:hover{color:var(--teal)}
+.pers-links-top svg{width:17px;height:17px;fill:currentColor}
+.pers-title{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:.5rem;transition:color .2s}
+.pers-card:hover .pers-title{color:var(--teal)}
+.pers-desc{font-size:.8rem;line-height:1.7;color:var(--muted);flex:1}
+.pers-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem}
+.pers-tag{font-family:var(--mono);font-size:.64rem;color:var(--muted)}
+
+/* ── CONTACT ────────────────────────── */
+.contact-section{text-align:center;padding:1rem 0 0}
+.contact-section h2{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:600;color:var(--white);margin-bottom:.9rem;letter-spacing:-.01em}
+.contact-section p{font-size:.9rem;max-width:440px;margin:0 auto 2rem;line-height:1.85}
+.btn-teal{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--teal);color:var(--teal);padding:.9rem 1.75rem;border-radius:4px;font-family:var(--mono);font-size:.82rem;transition:background .2s}
+.btn-teal:hover{background:var(--teal-dim)}
+.footer-note{margin-top:4rem;font-family:var(--mono);font-size:.7rem;color:var(--muted);text-align:center;line-height:2.2}
+.footer-note a{color:var(--muted);border-bottom:1px solid var(--border);transition:color .2s,border-color .2s}
+.footer-note a:hover{color:var(--teal);border-color:var(--teal)}
+
+/* ── MOBILE ─────────────────────────── */
+@media(max-width:860px){
+  .container{grid-template-columns:1fr;padding:0 1.75rem}
+  .left{position:static;height:auto;padding:3.5rem 0 1.5rem}
+  .sidenav{display:none}
+  .right{padding:2rem 0 4rem;gap:5rem}
+  .feat-summary{grid-template-columns:80px 1fr auto;gap:1rem}
+  .feat-thumb-fallback{font-size:1.5rem}
+  .personal-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+  .soft-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ═══ LEFT ═══════════════════════════════════════ -->
+  <aside class="left">
+    <div>
+      <p class="intro-tag">Hi, my name is</p>
+      <h1>Tonoy Chakraborty</h1>
+      <h2>Lead Unity Developer</h2>
+      <p>Unity engineer with 9+ years in mobile game development and 2+ years leading teams. Cross-platform, live-ops, porting, plugins, etc.</p>
+      <nav class="sidenav">
+        <a href="#professional" class="active"><span class="nl"></span>Professional</a>
+        <a href="#personal"><span class="nl"></span>Personal</a>
+        <a href="#skills"><span class="nl"></span>Skills</a>
+        <a href="#contact"><span class="nl"></span>Contact</a>
+      </nav>
+    </div>
+    <div class="socials">
+      <a href="https://github.com/YOURUSERNAME" target="_blank" title="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/tonoy-chakraborty" target="_blank" title="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="mailto:tonoychan55@gmail.com" title="Email">
+        <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+      </a>
+      <a href="cv.pdf" download title="Download CV">
+        <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ═══ RIGHT ══════════════════════════════════════ -->
+  <main class="right" id="content">
+
+    <!-- ── PROFESSIONAL ──────────────────────────────── -->
+    <section id="professional">
+      <p class="sec-label">Work</p>
+      <h2 class="sec-title">Professional projects</h2>
+      <p class="sec-sub">Click any project to see what I worked on.</p>
+
+      <div class="featured-list">
+
+        <!-- ── ARCANE RUSH ── -->
+        <div class="feat-card" onclick="toggleCard(this)">
+          <div class="feat-summary">
+            <div class="feat-thumb">
+              <img src="images/arcane-cover.png" alt="Arcane Rush Battlegrounds"/>
+            </div>
+            <div class="feat-body">
+              <p class="feat-company">Gear Games &nbsp;·&nbsp; 2022–2026</p>
+              <h3 class="feat-title">Arcane Rush Battlegrounds</h3>
+              <p class="feat-desc">Async multiplayer strategy card auto-battler for iOS, Android, Steam and Nintendo Switch.</p>
+              <ul class="feat-tags">
+                <li class="feat-tag">Unity</li><li class="feat-tag">C#</li>
+                <li class="feat-tag">Addressables</li><li class="feat-tag">Jenkins</li>
+                <li class="feat-tag">iOS</li><li class="feat-tag">Android</li>
+                <li class="feat-tag">Steam</li><li class="feat-tag">Switch</li>
+              </ul>
+            </div>
+            <div class="feat-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="feat-expand">
+            <div class="feat-expand-inner">
+              <div class="feat-role-badge">Lead Improvement &amp; Porting Engineer · 2 years (2024–2026)</div>
+
+              <!-- Impact stats -->
+              <div class="feat-impacts">
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">40%</span>
+                  <span class="feat-impact-label">Faster workflow via AI-assisted shader refactoring &amp; legacy plugin removal</span>
+                </div>
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">30%</span>
+                  <span class="feat-impact-label">Smaller build size via custom asset optimisation &amp; separate ODL files</span>
+                </div>
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">4</span>
+                  <span class="feat-impact-label">Platforms shipped — iOS, Android, Steam (Win/Mac/Deck), Nintendo Switch</span>
+                </div>
+              </div>
+
+              <div class="feat-expand-cols">
+                <div>
+                  <p class="feat-expand-label">Porting</p>
+                  <ul class="feat-expand-list">
+                    <li>Architected a "Platform-First" single Unity codebase supporting iOS, Android, Steam and Nintendo Switch with 100% feature parity</li>
+                    <li>Designed platform separation using Prefab Variants, separate asset ODL files, Preprocessor Directives and Assembly References</li>
+                    <li>Led Keyboard &amp; Mouse, GamePad and Steam Deck input support — built a custom Input System on top of Unity's new Input System to match game and design needs</li>
+                    <li>Added Nintendo Switch to the pipeline using the same approach established for Steam</li>
+                    <li>Collaborated with server-side team to bridge mobile APIs to Steam, including MicroTransaction support</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="feat-expand-label">Improvement</p>
+                  <ul class="feat-expand-list">
+                    <li>Set up Jenkins CI/CD build scripts for Steam and Nintendo — extended existing mobile Groovy scripts; added CLI-based direct upload to Steam</li>
+                    <li>Led Unity 2020 → Unity 6 migration; resolved plugin incompatibilities using AI-assisted workflow to recreate effects and eliminate legacy dependencies</li>
+                    <li>Improved Localization pipeline and Addressables workflows — optimised asset streaming and memory usage across all platforms</li>
+                    <li>Optimised Client-Server API calls — improved real-time data sync and reduced API call overhead across multi-platform deployments</li>
+                    <li>Updated and maintained key plugins including Ads mediation, IAP, and Marketing attribution (Adjust)</li>
+                    <li>Established cross-platform best practices for the engineering team — features built mobile-first work on Steam without extra effort</li>
+                    <li>Facilitated knowledge transfer and documented the Steam dashboard workflow for the team</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="feat-expand-links">
+                <a href="https://play.google.com/store/apps/details?id=com.alleylabs.battlegrounds" target="_blank" onclick="event.stopPropagation()">Play Store ↗</a>
+                <a href="https://store.steampowered.com/app/1491880/Arcane_Rush_Battlegrounds/" target="_blank" onclick="event.stopPropagation()">Steam ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── TROLLS APPLE ARCADE ── -->
+        <div class="feat-card" onclick="toggleCard(this)">
+          <div class="feat-summary">
+            <div class="feat-thumb">
+              <img src="images/trolls-cover.png" alt="Trolls Apple Arcade"/>
+            </div>
+            <div class="feat-body">
+              <p class="feat-company">Gear Games &nbsp;·&nbsp; Apple &amp; DreamWorks &nbsp;·&nbsp; 2022–2023</p>
+              <h3 class="feat-title">Trolls — Apple Arcade IP</h3>
+              <p class="feat-desc">Led client-side Apple Arcade release of a licensed DreamWorks title across iOS, iPad and tvOS.</p>
+              <ul class="feat-tags">
+                <li class="feat-tag">Unity</li><li class="feat-tag">C#</li>
+                <li class="feat-tag">Apple Arcade</li><li class="feat-tag">tvOS</li>
+                <li class="feat-tag">iOS</li><li class="feat-tag">iPadOS</li>
+                <li class="feat-tag">Cloud Save</li>
+              </ul>
+            </div>
+            <div class="feat-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="feat-expand">
+            <div class="feat-expand-inner">
+              <div class="feat-role-badge">Lead Client Engineer · 1 year (2022–2023)</div>
+
+              <div class="feat-impacts">
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">3</span>
+                  <span class="feat-impact-label">Platforms — iOS, iPadOS, tvOS</span>
+                </div>
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">60/40</span>
+                  <span class="feat-impact-label">Daily split — 60% own tasks, 40% reviews, unblocking team &amp; client meetings</span>
+                </div>
+              </div>
+
+              <div class="feat-expand-cols">
+                <div>
+                  <p class="feat-expand-label">Apple Arcade Features</p>
+                  <ul class="feat-expand-list">
+                    <li>Removed IAP and Ads — implemented fully offline gameplay as per Apple Arcade requirements</li>
+                    <li>Added Multi-User Profile support and 3 Save Game slot system</li>
+                    <li>Reworked save system to use Apple Cloud Save</li>
+                    <li>Added Localization support for multi-region Arcade release</li>
+                    <li>Implemented full input support for tvOS — touch, gamepad and Apple TV Remote across stacked UI flows</li>
+                    <li>Game values control via Blueprint system for live configuration</li>
+                    <li>Stress tested and optimised builds for tvOS performance and graphics</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="feat-expand-label">Leadership &amp; Delivery</p>
+                  <ul class="feat-expand-list">
+                    <li>Created High-Level (management) and Low-Level (in-team) timelines with per-member task ownership based on business milestones</li>
+                    <li>Investigated and resolved critical tvOS blockers — launch crash (traced to PlayerPrefs), performance issues and graphics regressions; documented root causes and fixes</li>
+                    <li>Coordinated with Art, Design and other discipline leads on delivery timelines and cross-team dependencies</li>
+                    <li>Led weekly client meetings with Apple &amp; DreamWorks — shared status docs and translated technical caveats into non-technical language</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- ── FOOD TRUCK CHEF ── -->
+        <div class="feat-card" onclick="toggleCard(this)">
+          <div class="feat-summary">
+            <div class="feat-thumb">
+              <img src="images/foodtruck-cover.jpg" alt="Food Truck Chef"/>
+            </div>
+            <div class="feat-body">
+              <p class="feat-company">Nukebox Studios &nbsp;·&nbsp; 2017–2020</p>
+              <h3 class="feat-title">Food Truck Chef</h3>
+              <p class="feat-desc">Core Unity developer on Nukebox's flagship LiveOps title — scaled from contributor to primary technical point of contact for Art, QA and Design.</p>
+              <ul class="feat-tags">
+                <li class="feat-tag">Unity</li><li class="feat-tag">C#</li>
+                <li class="feat-tag">LiveOps</li><li class="feat-tag">IAP</li>
+                <li class="feat-tag">iOS</li><li class="feat-tag">Android</li>
+                <li class="feat-tag">Editor Tooling</li>
+              </ul>
+            </div>
+            <div class="feat-chevron">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+          <div class="feat-expand">
+            <div class="feat-expand-inner">
+              <div class="feat-role-badge">Unity Developer · 3 years (2017–2020)</div>
+
+              <div class="feat-impacts">
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">3</span>
+                  <span class="feat-impact-label">Titles powered by systems I built — Food Truck Chef, Chef Cat Ava &amp; SpongeBob</span>
+                </div>
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">0</span>
+                  <span class="feat-impact-label">Regression launches via Editor tools for data validation on Restaurants, Events &amp; A/B Testing</span>
+                </div>
+                <div class="feat-impact-item">
+                  <span class="feat-impact-num">60%</span>
+                  <span class="feat-impact-label">Fewer hotfix launches via build checklists and automated crash testing tools</span>
+                </div>
+              </div>
+
+              <div class="feat-expand-cols">
+                <div>
+                  <p class="feat-expand-label">Systems Built</p>
+                  <ul class="feat-expand-list">
+                    <li>Architected a centralised Popup Manager — handled layering, priority queues and state management; ported directly into Chef Cat Ava and SpongeBob: Krusty Cook-Off</li>
+                    <li>Built a Designer-Friendly Localization Manager for global releases — non-engineers could validate and update string data without touching code</li>
+                    <li>Adopted a "One Feature at a Time" refactoring strategy — upgraded legacy code alongside new feature work, drastically reducing build crashes and technical debt over 3 years</li>
+                    <li>Integrated IAP and built full ads mediation stack — adopted as the studio standard across multiple titles</li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="feat-expand-label">Tooling &amp; Leadership</p>
+                  <ul class="feat-expand-list">
+                    <li>Built custom Developer Tools for QA and Design teams — rapid data validation and automated testing shortened cross-department feedback loops significantly</li>
+                    <li>Acted as primary technical liaison between Art, QA and Production teams</li>
+                    <li>Coordinated feature-specific developer teams — aligned engineering output with producer timelines and long-term product goals</li>
+                    <li>Coding standards introduced became the blueprint for SpongeBob: Krusty Cook-Off development</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SHOW MORE -->
+      <button class="show-more-btn" onclick="toggleMore(this)" aria-expanded="false">
+        Show more
+        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+
+      <div class="more-list" id="more-list">
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">XCOM Legends</p>
+            <p class="more-company">Gear Games</p>
+          </div>
+          <div class="more-links">
+            <a href="https://xcom-legends.en.uptodown.com/android" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">MyVegas Bingo</p>
+            <p class="more-company">Gear Games</p>
+          </div>
+          <div class="more-links">
+            <a href="https://www.playstudios.com/myvegas-bingo/" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+              Site
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">M&amp;M Adventure</p>
+            <p class="more-company">Gear Games</p>
+          </div>
+          <div class="more-links">
+            <a href="https://m-m-s-tilting-point.en.aptoide.com/app" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">SpongeBob: Krusty Cook-Off</p>
+            <p class="more-company">Nukebox Studios</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.tiltingpoint.spongebob&hl=en" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">Chef Cat Ava</p>
+            <p class="more-company">Nukebox Studios</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.cooking.games.chef.cat.ava.delicious.tasty.food.restaurant.kitchen.diner.cafe.dairy.fever.craze" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">Room Flip</p>
+            <p class="more-company">Nukebox Studios</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.roomflip.home.design.games.decor.decorate.makeover.mansion.style.covet.match3.dressup.fashion" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">VR Room Walk</p>
+            <p class="more-company">Virtualinfocom</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.vrhome" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">Aswathama</p>
+            <p class="more-company">Virtualinfocom</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.Ashwathama" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">VR Car Race</p>
+            <p class="more-company">Virtualinfocom</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.vr.racing" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">Kidnapping</p>
+            <p class="more-company">Virtualinfocom</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.kidnapping" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">Legends Fight</p>
+            <p class="more-company">Virtualinfocom</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.Virtualinfocom.Fightofthelegeds6&hl=en" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+        <div class="more-item">
+          <div>
+            <p class="more-name">Katiya</p>
+            <p class="more-company">Virtualinfocom</p>
+          </div>
+          <div class="more-links">
+            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.katya.sword.fighter&hl=en" target="_blank">
+              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
+              Play Store
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PERSONAL ───────────────────────────────────── -->
+    <section id="personal">
+      <p class="sec-label">Side work</p>
+      <h2 class="sec-title">Personal projects</h2>
+      <p class="sec-sub">Things I build for fun, learning, or just because I wanted them to exist.</p>
+
+      <div class="personal-grid">
+
+        <div class="pers-card">
+          <div class="pers-thumb">
+            <!-- EDIT: <img src="images/tictactoe.jpg" alt="TicTacToe Netcode"/> -->
+            <div class="pers-thumb-fallback" style="background:linear-gradient(135deg,#0a1f2a,#0d3d4a)">✕〇</div>
+          </div>
+          <div class="pers-body">
+            <div class="pers-top">
+              <svg class="pers-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+              <div class="pers-links-top">
+                <a href="https://github.com/Tonoychan/TicTacToe-Netcode" target="_blank" title="GitHub">
+                  <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="pers-title">TicTacToe — Netcode</h3>
+            <p class="pers-desc">Online multiplayer Tic-Tac-Toe built in Unity using Netcode for GameObjects. Built to explore Unity's networking stack and real-time game state sync.</p>
+            <ul class="pers-tags">
+              <li class="pers-tag">Unity</li>
+              <li class="pers-tag">C#</li>
+              <li class="pers-tag">Netcode for GOs</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pers-card">
+          <div class="pers-thumb">
+            <!-- EDIT: <img src="images/memorypuzzle.jpg" alt="3D Memory Puzzle"/> -->
+            <div class="pers-thumb-fallback" style="background:linear-gradient(135deg,#1a0a2e,#2d1060)">🧠</div>
+          </div>
+          <div class="pers-body">
+            <div class="pers-top">
+              <svg class="pers-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+              <div class="pers-links-top">
+                <a href="https://github.com/Tonoychan/3D-MemoryPuzzle" target="_blank" title="GitHub">
+                  <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="pers-title">3D Memory Puzzle</h3>
+            <p class="pers-desc">A 3D card-matching memory puzzle game in Unity. Focus on 3D card flip animations, game state management and scalable board generation.</p>
+            <ul class="pers-tags">
+              <li class="pers-tag">Unity</li>
+              <li class="pers-tag">C#</li>
+              <li class="pers-tag">3D</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pers-card">
+          <div class="pers-thumb">
+            <!-- EDIT: <img src="images/spaceshooter.jpg" alt="Space Shooter Advance"/> -->
+            <div class="pers-thumb-fallback" style="background:linear-gradient(135deg,#05051a,#0d0d35)">🚀</div>
+          </div>
+          <div class="pers-body">
+            <div class="pers-top">
+              <svg class="pers-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+              <div class="pers-links-top">
+                <a href="https://github.com/Tonoychan/SpaceShooterAdvance" target="_blank" title="GitHub">
+                  <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+                </a>
+              </div>
+            </div>
+            <h3 class="pers-title">Space Shooter Advance</h3>
+            <p class="pers-desc">An advanced 2D space shooter with enemy wave patterns, power-up systems and a scrolling parallax background. Built to practice clean game architecture.</p>
+            <ul class="pers-tags">
+              <li class="pers-tag">Unity</li>
+              <li class="pers-tag">C#</li>
+              <li class="pers-tag">2D</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SKILLS ───────────────────────────────────── -->
+    <section id="skills">
+      <p class="sec-label">Skills</p>
+      <h2 class="sec-title">Technical skills</h2>
+
+      <div class="skills-legend">
+        <div class="legend-item">
+          <div class="legend-solid"></div>
+          Proficient
+        </div>
+        <div class="legend-item">
+          <div class="legend-dashed"></div>
+          Some experience
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">Languages</p>
+        <div class="skill-tags">
+          <span class="tag">C#</span>
+          <span class="tag">JS / TS</span>
+          <span class="tag-dim">C++</span>
+          <span class="tag-dim">Python</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">Unity Expertise</p>
+        <div class="skill-tags">
+          <span class="tag">Unity</span>
+          <span class="tag">OOP / SOLID</span>
+          <span class="tag">uGUI</span>
+          <span class="tag">UI Toolkit</span>
+          <span class="tag">Addressables</span>
+          <span class="tag">LiveOps</span>
+          <span class="tag">Editor Tooling</span>
+          <span class="tag">Localization</span>
+          <span class="tag">VFX Graph</span>
+          <span class="tag">Shader Graph</span>
+          <span class="tag">Leaderboards</span>
+          <span class="tag">Analytics</span>
+          <span class="tag">UGS</span>
+          <span class="tag">Fish-Net</span>
+          <span class="tag-dim">DOTS / ECS</span>
+          <span class="tag-dim">Cloud Save</span>
+          <span class="tag-dim">Netcode for GOs</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">Platforms</p>
+        <div class="skill-tags">
+          <span class="tag">iOS</span>
+          <span class="tag">Android</span>
+          <span class="tag">PC / Steam</span>
+          <span class="tag-dim">Nintendo Switch</span>
+          <span class="tag-dim">Apple Arcade</span>
+          <span class="tag-dim">Netflix</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">SDKs & Integrations</p>
+        <div class="skill-tags">
+          <span class="tag">IAP</span>
+          <span class="tag">Firebase</span>
+          <span class="tag">LevelPlay Ads</span>
+          <span class="tag">UGS</span>
+          <span class="tag-dim">Amazon S3</span>
+          <span class="tag-dim">Unity Playworks</span>
+          <span class="tag-dim">WebSockets</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <p class="skill-group-label">DevOps & Tools</p>
+        <div class="skill-tags">
+          <span class="tag">GitHub / GitLab</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Jira</span>
+          <span class="tag">Confluence</span>
+          <span class="tag">Figma</span>
+          <span class="tag-dim">ClickUp</span>
+          <span class="tag-dim">Docker</span>
+        </div>
+      </div>
+
+      <!-- SOFT SKILLS -->
+      <p class="skill-group-label" style="margin-top:2rem;margin-bottom:1rem">Soft skills</p>
+      <div class="soft-grid">
+        <div class="soft-card">
+          <div class="soft-icon">🏗️</div>
+          <div class="soft-name">Architecture</div>
+          <div class="soft-desc">Defined Unity architecture standards and C# best practices adopted studio-wide at Gear Games.</div>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon">🧑‍🏫</div>
+          <div class="soft-name">1:5 Mentorship</div>
+          <div class="soft-desc">Led regular 1:1s and mentoring sessions for junior engineers across Gear Games and Nukebox Studios.</div>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon">🔎</div>
+          <div class="soft-name">Code Reviewer</div>
+          <div class="soft-desc">Enforced Unity architecture and C# standards through structured code reviews across a 6+ engineer team.</div>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon">🚢</div>
+          <div class="soft-name">Cross-Platform Delivery</div>
+          <div class="soft-desc">Led porting of Arcane Rush from mobile to Steam, Nintendo Switch and Apple Arcade simultaneously.</div>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon">🤝</div>
+          <div class="soft-name">Stakeholder Alignment</div>
+          <div class="soft-desc">Collaborated with Art, Design, Product and senior management to align roadmap priorities and ensure on-time delivery.</div>
+        </div>
+        <div class="soft-card">
+          <div class="soft-icon">📋</div>
+          <div class="soft-name">Agile / Scrum</div>
+          <div class="soft-desc">Ran daily standups, sprint planning and monthly technical improvement plans across multiple concurrent projects.</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── CONTACT ───────────────────────────────────── -->
+    <section id="contact" class="contact-section">
+      <p class="sec-label">What's next?</p>
+      <h2>Get in touch</h2>
+      <p>I'm currently open to new opportunities. Whether you have a role, a project, or just want to say hi — my inbox is open.</p>
+      <a href="mailto:tonoychan55@gmail.com" class="btn-teal">Say hello →</a>
+      <div class="footer-note">
+        <p>Designed &amp; built by Tonoy Chakraborty &amp; Claude</p>
+        <p>Inspired by the Internet</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+function toggleCard(card) {
+  const isOpen = card.classList.contains('open');
+  // close all others
+  document.querySelectorAll('.feat-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+function toggleMore(btn) {
+  const list = document.getElementById('more-list');
+  const open = list.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  btn.setAttribute('aria-expanded', open);
+  btn.childNodes[0].textContent = open ? 'Show less ' : 'Show more ';
+}
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sidenav a');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const a = document.querySelector(`.sidenav a[href="#${e.target.id}"]`);
+      if (a) a.classList.add('active');
+    }
+  });
+}, { threshold: 0.25 });
+sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
