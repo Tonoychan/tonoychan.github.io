@@ -1,1142 +1,1144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tonoy Chakraborty — Unity Developer</title>
-<meta name="description" content="Lead Unity Developer based in Hanoi. 9+ years in mobile game development, cross-platform porting and live-ops."/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Tonoy Chakraborty — Unity Engineer with 9+ years in mobile game development, cross-platform porting and live-ops.">
+<title>Tonoy Chakraborty — Unity Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --navy:    #0a192f;
-  --navy2:   #112240;
-  --navy3:   #1d3461;
-  --teal:    #64ffda;
-  --teal-dim:rgba(100,255,218,0.1);
-  --text:    #ccd6f6;
-  --muted:   #8892b0;
-  --white:   #e6f1ff;
-  --border:  rgba(100,255,218,0.1);
-  --font:    'Inter', sans-serif;
-  --mono:    'Fira Code', monospace;
+:root {
+  --green: #00e676;
+  --green-dim: #00994d;
+  --green-glow: rgba(0,230,118,0.08);
+  --bg: #080808;
+  --bg-card: #0e0e0e;
+  --bg-hover: #141414;
+  --border: #1c1c1c;
+  --border-hover: #2e2e2e;
+  --text: #c8c8c8;
+  --text-dim: #555;
+  --text-muted: #333;
+  --font: 'JetBrains Mono', 'Courier New', monospace;
 }
-html{scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--navy);color:var(--muted);min-height:100vh;overflow-x:hidden;line-height:1.6}
-a{color:inherit;text-decoration:none}
-::selection{background:var(--teal-dim);color:var(--teal)}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.7;
+  cursor: default;
+}
+::selection { background: var(--green); color: #000; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #1e1e1e; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2a2a2a; }
 
-/* ── LAYOUT ─────────────────────────── */
-.container{
-  display:grid;
-  grid-template-columns:minmax(320px,400px) 1fr;
-  max-width:1200px;
-  margin:0 auto;
-  min-height:100vh;
-  padding:0 5vw;
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 56px;
+  background: rgba(8,8,8,0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
 }
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+.nav-prompt { color: var(--green-dim); }
+.nav-dir { color: var(--text-dim); }
+.nav-cursor {
+  display: inline-block;
+  width: 8px; height: 14px;
+  background: var(--green);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 1.1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::before { content: './'; color: var(--text-muted); }
+.nav-links a:hover { color: var(--green); }
+.nav-links a:hover::before { color: var(--green-dim); }
+.nav-contact-btn {
+  border: 1px solid var(--green-dim);
+  color: var(--green);
+  padding: 6px 16px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-contact-btn:hover { background: var(--green); color: #000; }
+.nav-contact-btn::before { content: none !important; }
 
-/* ── LEFT ───────────────────────────── */
-.left{
-  position:sticky;
-  top:0;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  padding:6rem 0 4rem;
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 48px 60px;
+  position: relative;
+  overflow: hidden;
 }
-.intro-tag{font-family:var(--mono);font-size:0.8rem;color:var(--teal);margin-bottom:1.1rem;letter-spacing:.05em}
-.left h1{font-size:clamp(2rem,3vw,2.8rem);font-weight:600;color:var(--white);letter-spacing:-.02em;line-height:1.1;margin-bottom:.55rem}
-.left h2{font-size:1.1rem;font-weight:400;color:var(--muted);margin-bottom:1.25rem}
-.left p{font-size:.88rem;line-height:1.8;max-width:300px;color:var(--muted)}
+.hero-scanline {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  pointer-events: none;
+}
+.hero-top {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+}
+.hero-terminal-line {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  opacity: 0;
+  animation: fadeSlideUp 0.4s ease forwards;
+}
+.hero-terminal-line .p { color: var(--green-dim); }
+.hero-terminal-line .c { color: var(--text-dim); }
+.hero-name {
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 8px 0 4px;
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease 0.3s forwards;
+}
+.hero-name-cursor {
+  display: inline-block;
+  width: 5px;
+  height: 0.85em;
+  background: var(--green);
+  vertical-align: baseline;
+  margin-left: 4px;
+  animation: blink 1.1s step-end infinite;
+}
+.hero-role {
+  font-size: 13px;
+  color: var(--green);
+  letter-spacing: 0.14em;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease 0.5s forwards;
+}
+.hero-role span { color: var(--text-dim); }
+.hero-bio {
+  font-size: 14px;
+  color: var(--text-dim);
+  max-width: 620px;
+  line-height: 1.9;
+  margin-bottom: 36px;
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease 0.7s forwards;
+}
+.hero-bio em { color: var(--text); font-style: normal; }
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease 0.9s forwards;
+}
+.btn-primary {
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 10px 28px;
+  font-family: var(--font);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  background: none;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-primary:hover { background: var(--green); color: #000; }
+.btn-secondary {
+  border: 1px solid var(--border-hover);
+  color: var(--text-dim);
+  padding: 10px 28px;
+  font-family: var(--font);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  background: none;
+  text-decoration: none;
+  display: inline-block;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover { border-color: var(--text-dim); color: var(--text); }
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  animation: fadeSlideUp 0.5s ease 1.1s forwards;
+}
+.stat {
+  padding: 20px 40px 20px 0;
+  margin-right: 40px;
+  border-right: 1px solid var(--border);
+}
+.stat:last-child { border-right: none; }
+.stat-num { font-size: 32px; font-weight: 700; color: var(--green); line-height: 1; }
+.stat-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.12em; margin-top: 4px; }
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 48px;
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+@keyframes fadeSlideUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
 
-.sidenav{margin-top:2.5rem;display:flex;flex-direction:column;gap:.2rem}
-.sidenav a{display:flex;align-items:center;gap:.85rem;font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);padding:.35rem 0;transition:color .2s;width:fit-content}
-.sidenav a .nl{width:36px;height:1px;background:var(--muted);transition:width .25s,background .25s;flex-shrink:0}
-.sidenav a:hover,.sidenav a.active{color:var(--white)}
-.sidenav a:hover .nl,.sidenav a.active .nl{width:64px;background:var(--teal)}
+/* ─── SECTION COMMON ─── */
+section { padding: 80px 48px; border-top: 1px solid var(--border); }
+.section-header { margin-bottom: 48px; }
+.section-cmd {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.section-cmd .p { color: var(--green-dim); }
+.section-cmd .c { color: var(--text-dim); }
+.section-title {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.section-title span { color: var(--green); }
 
-.socials{display:flex;gap:1.1rem;align-items:center}
-.socials a{color:var(--muted);transition:color .2s;display:flex}
-.socials a:hover{color:var(--teal)}
-.socials svg{width:19px;height:19px;fill:currentColor}
+/* ─── PROFESSIONAL WORK ─── */
+.work-featured { display: flex; flex-direction: column; gap: 2px; margin-bottom: 40px; }
+.work-card {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.work-card:hover { border-color: var(--border-hover); }
+.work-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  cursor: pointer;
+  gap: 16px;
+}
+.work-card-header:hover { background: var(--bg-hover); }
+.work-card-left { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
+.work-card-index { font-size: 11px; color: var(--text-muted); min-width: 24px; }
+.work-card-info { flex: 1; min-width: 0; }
+.work-card-title { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.work-card-meta { font-size: 11px; color: var(--text-dim); letter-spacing: 0.04em; }
+.work-card-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.work-card-year { font-size: 11px; color: var(--text-muted); }
+.work-card-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.tag {
+  font-size: 10px;
+  border: 1px solid var(--border-hover);
+  color: var(--text-dim);
+  padding: 2px 8px;
+  letter-spacing: 0.04em;
+}
+.tag.green { border-color: var(--green-dim); color: var(--green); }
+.work-card-toggle { font-size: 16px; color: var(--text-muted); transition: transform 0.2s; }
+.work-card.open .work-card-toggle { transform: rotate(45deg); color: var(--green); }
+.work-card-body { display: none; padding: 0 24px 24px; border-top: 1px solid var(--border); }
+.work-card.open .work-card-body { display: block; }
+.work-body-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 20px; }
+.work-body-col {}
+.work-body-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.12em; margin-bottom: 10px; }
+.work-body-title { font-size: 13px; color: var(--green); margin-bottom: 8px; font-weight: 500; }
+.work-body-points { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.work-body-points li {
+  font-size: 12px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  padding-left: 16px;
+  position: relative;
+}
+.work-body-points li::before { content: '›'; color: var(--green-dim); position: absolute; left: 0; }
+.work-highlights {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.work-highlight { font-size: 11px; color: var(--text-dim); }
+.work-highlight strong { color: var(--green); font-weight: 500; }
+.work-links { display: flex; gap: 10px; margin-top: 16px; }
+.work-link {
+  font-size: 11px;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 4px 12px;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: border-color 0.2s, color 0.2s;
+}
+.work-link:hover { border-color: var(--green-dim); color: var(--green); }
 
-/* ── RIGHT ──────────────────────────── */
-.right{padding:6rem 0 6rem 5rem;display:flex;flex-direction:column;gap:6rem}
+/* Secondary work grid */
+.work-secondary-label { font-size: 10px; color: var(--text-muted); letter-spacing: 0.12em; margin-bottom: 16px; }
+.work-secondary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
+.work-secondary-item {
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  background: var(--bg-card);
+  transition: border-color 0.2s, background 0.2s;
+}
+.work-secondary-item:hover { border-color: var(--border-hover); background: var(--bg-hover); }
+.work-sec-title { font-size: 13px; color: #ddd; margin-bottom: 3px; }
+.work-sec-company { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; }
+.work-sec-link {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.work-sec-link:hover { color: var(--green); }
 
-.sec-label{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--teal);margin-bottom:.6rem}
-.sec-title{font-size:1.5rem;font-weight:600;color:var(--white);margin-bottom:.5rem;letter-spacing:-.01em}
-.sec-sub{font-size:.85rem;color:var(--muted);margin-bottom:2rem;max-width:480px;line-height:1.7}
+/* ─── PERSONAL PROJECTS ─── */
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+.project-card {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.project-card:hover { border-color: var(--green-dim); background: var(--bg-hover); }
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.project-card:hover::before { transform: scaleX(1); }
+.project-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.project-type {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  border: 1px solid var(--green-dim);
+  color: var(--green);
+  padding: 2px 8px;
+  flex-shrink: 0;
+}
+.project-link-icon { color: var(--text-muted); font-size: 14px; text-decoration: none; transition: color 0.2s; }
+.project-link-icon:hover { color: var(--green); }
+.project-title { font-size: 14px; font-weight: 500; color: #fff; line-height: 1.3; }
+.project-desc { font-size: 12px; color: var(--text-dim); line-height: 1.7; flex: 1; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: auto; padding-top: 4px; }
+.project-tag { font-size: 10px; border: 1px solid var(--border-hover); color: var(--text-muted); padding: 1px 7px; }
 
-/* ── SKILLS SECTION ─────────────────── */
-.skills-legend{
-  display:flex;
-  align-items:center;
-  gap:1.5rem;
-  margin-bottom:1.75rem;
-  flex-wrap:wrap;
+/* ─── SKILLS ─── */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+.skill-group { }
+.skill-group-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
 }
-.legend-item{
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-  font-family:var(--mono);
-  font-size:.68rem;
-  color:var(--muted);
+.skill-group-icon { color: var(--green-dim); font-size: 12px; }
+.skill-group-name { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.skill-tag {
+  font-size: 11px;
+  border: 1px solid var(--border-hover);
+  color: var(--text-dim);
+  padding: 4px 10px;
+  transition: border-color 0.2s, color 0.2s;
 }
-.legend-solid{
-  width:32px;height:1px;
-  background:var(--teal);
-  border:1px solid var(--teal);
-}
-.legend-dashed{
-  width:32px;height:0;
-  border-top:1px dashed rgba(100,255,218,.5);
-}
+.skill-tag:hover { border-color: var(--green-dim); color: var(--green); }
+.skill-tag.primary { border-color: var(--green-dim); color: var(--green); }
+.skill-tag.muted { border-color: var(--border); color: var(--text-muted); }
+.skills-note { margin-top: 28px; font-size: 11px; color: var(--text-muted); display: flex; gap: 20px; flex-wrap: wrap; }
+.skills-note span { display: flex; align-items: center; gap: 8px; }
+.swatch { width: 20px; height: 1px; }
+.swatch.p { background: var(--green); }
+.swatch.m { background: var(--border-hover); }
 
-.skill-group{margin-bottom:1.5rem}
-.skill-group-label{
-  font-family:var(--mono);
-  font-size:.65rem;
-  text-transform:uppercase;
-  letter-spacing:.14em;
-  color:var(--muted);
-  margin-bottom:.65rem;
+/* ─── SOFT SKILLS ─── */
+.soft-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 40px; }
+.soft-card {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  padding: 16px 20px;
 }
-.skill-tags{display:flex;flex-wrap:wrap;gap:.45rem}
+.soft-card-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.soft-icon { font-size: 16px; color: var(--green-dim); }
+.soft-title { font-size: 13px; color: #ddd; font-weight: 500; }
+.soft-desc { font-size: 11px; color: var(--text-dim); line-height: 1.6; }
 
-/* solid = proficient */
-.tag{
-  font-family:var(--mono);
-  font-size:.72rem;
-  color:var(--teal);
-  border:1px solid rgba(100,255,218,.35);
-  padding:.25rem .75rem;
-  border-radius:3px;
-  background:var(--teal-dim);
-  transition:border-color .2s, background .2s;
+/* ─── CONTACT ─── */
+#contact { padding-bottom: 80px; }
+.contact-inner { max-width: 640px; }
+.contact-terminal {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  margin: 32px 0;
+  overflow: hidden;
 }
-.tag:hover{border-color:var(--teal);background:rgba(100,255,218,.15)}
+.contact-terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: var(--bg-hover);
+  border-bottom: 1px solid var(--border);
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot.r { background: #3a1a1a; border: 1px solid #5a2020; }
+.dot.y { background: #3a3a1a; border: 1px solid #5a5a20; }
+.dot.g { background: #1a3a1a; border: 1px solid #205a20; }
+.terminal-title { font-size: 11px; color: var(--text-muted); margin-left: 8px; letter-spacing: 0.06em; }
+.contact-terminal-body { padding: 24px; }
+.contact-line { font-size: 13px; margin-bottom: 10px; }
+.contact-line .p { color: var(--green-dim); }
+.contact-line .k { color: #9cdcfe; }
+.contact-line .s { color: #ce9178; }
+.contact-line .c { color: var(--text-dim); }
+.contact-links { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+.contact-link-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+  color: inherit;
+}
+.contact-link-item:hover { border-color: var(--green-dim); background: var(--green-glow); }
+.contact-link-label { font-size: 11px; color: var(--text-muted); min-width: 80px; }
+.contact-link-val { font-size: 13px; color: var(--text); flex: 1; }
+.contact-link-arrow { color: var(--text-muted); transition: color 0.2s; }
+.contact-link-item:hover .contact-link-arrow { color: var(--green); }
+.contact-cta { margin-top: 28px; font-size: 13px; color: var(--text-dim); line-height: 1.8; }
+.contact-cta em { color: var(--green); font-style: normal; }
 
-/* dashed = some experience */
-.tag-dim{
-  font-family:var(--mono);
-  font-size:.72rem;
-  color:rgba(100,255,218,.45);
-  border:1px dashed rgba(100,255,218,.25);
-  padding:.25rem .75rem;
-  border-radius:3px;
-  background:transparent;
-  transition:border-color .2s, color .2s;
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
-.tag-dim:hover{border-color:rgba(100,255,218,.5);color:rgba(100,255,218,.7)}
+.footer-left { font-size: 11px; color: var(--text-muted); }
+.footer-left span { color: var(--text-dim); }
+.footer-right { font-size: 11px; color: var(--text-muted); display: flex; gap: 20px; }
+.footer-right a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+.footer-right a:hover { color: var(--green); }
 
-/* ── SOFT SKILLS ────────────────────── */
-.soft-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
-  gap:.75rem;
-  margin-top:.25rem;
-}
-.soft-card{
-  background:var(--navy2);
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:.85rem 1rem;
-  transition:border-color .2s, background .2s;
-}
-.soft-card:hover{border-color:rgba(100,255,218,.25);background:var(--navy3)}
-.soft-icon{font-size:1.2rem;margin-bottom:.4rem}
-.soft-name{font-size:.82rem;color:var(--white);font-weight:500;margin-bottom:.2rem}
-.soft-desc{font-size:.72rem;color:var(--muted);line-height:1.6}
+/* ─── REVEAL ANIMATION ─── */
+.reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── FEATURED PROFESSIONAL CARDS ────── */
-.featured-list{display:flex;flex-direction:column;gap:.75rem}
-
-.feat-card{
-  border:1px solid var(--border);
-  border-radius:8px;
-  margin-bottom:.75rem;
-  overflow:hidden;
-  transition:border-color .2s;
-  cursor:pointer;
-  background:var(--navy2);
-}
-.feat-card:hover{border-color:rgba(100,255,218,.25)}
-.feat-card.open{border-color:rgba(100,255,218,.35)}
-
-/* summary row — always visible */
-.feat-summary{
-  display:grid;
-  grid-template-columns:140px 1fr auto;
-  gap:1.5rem;
-  align-items:center;
-  padding:1.25rem 1.5rem;
-  transition:background .2s;
-}
-.feat-card:hover .feat-summary{background:#16213a}
-.feat-card.open .feat-summary{background:#16213a}
-
-.feat-thumb{
-  border-radius:5px;overflow:hidden;border:2px solid var(--navy3);
-  aspect-ratio:16/10;background:var(--navy2);transition:border-color .2s;flex-shrink:0;
-}
-.feat-card.open .feat-thumb,.feat-card:hover .feat-thumb{border-color:rgba(100,255,218,.2)}
-.feat-thumb img{width:100%;height:100%;object-fit:cover;opacity:.75;transition:opacity .2s;display:block}
-.feat-card:hover .feat-thumb img,.feat-card.open .feat-thumb img{opacity:1}
-.feat-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2rem}
-
-.feat-company{font-family:var(--mono);font-size:.72rem;color:var(--teal);letter-spacing:.06em;margin-bottom:.35rem}
-.feat-title{font-size:1.05rem;font-weight:600;color:var(--white);margin-bottom:.5rem;line-height:1.3;transition:color .2s}
-.feat-card:hover .feat-title,.feat-card.open .feat-title{color:var(--teal)}
-.feat-desc{font-size:.86rem;line-height:1.7;color:var(--muted);margin-bottom:.65rem}
-.feat-tags{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;padding:0;margin:0}
-.feat-tag{
-  font-family:var(--mono);
-  font-size:.72rem;
-  color:var(--teal);
-  background:var(--teal-dim);
-  border:1px solid rgba(100,255,218,.2);
-  padding:.2rem .65rem;
-  border-radius:50px;
-  letter-spacing:.02em;
-}
-
-.feat-chevron{color:var(--muted);display:flex;align-items:center;flex-shrink:0;transition:color .2s}
-.feat-chevron svg{width:20px;height:20px;transition:transform .3s}
-.feat-card.open .feat-chevron svg{transform:rotate(180deg)}
-.feat-card.open .feat-chevron{color:var(--teal)}
-
-/* expand panel */
-.feat-expand{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height .4s ease;
-}
-.feat-card.open .feat-expand{max-height:1000px}
-
-.feat-expand-inner{
-  padding:0 1.5rem 1.75rem;
-  border-top:1px solid var(--border);
-  margin-top:0;
-}
-.feat-role-badge{
-  display:inline-flex;
-  font-family:var(--mono);
-  font-size:.68rem;
-  color:var(--teal);
-  background:var(--teal-dim);
-  border:1px solid rgba(100,255,218,.2);
-  padding:.25rem .75rem;
-  border-radius:50px;
-  margin:1rem 0 1.1rem;
-}
-.feat-expand-cols{
-  display:flex;
-  flex-direction:column;
-  gap:1.25rem;
-}
-.feat-expand-label{
-  font-family:var(--mono);
-  font-size:.72rem;
-  text-transform:uppercase;
-  letter-spacing:.1em;
-  color:var(--muted);
-  margin-bottom:.65rem;
-}
-.feat-expand-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.feat-expand-list li{
-  font-size:.88rem;
-  color:var(--muted);
-  line-height:1.7;
-  padding-left:1.1rem;
-  position:relative;
-}
-.feat-expand-list li::before{content:'▹';position:absolute;left:0;color:var(--teal);font-size:.7rem;top:.15rem}
-.feat-expand-links{margin-top:1.1rem;display:flex;gap:1rem}
-.feat-expand-links a{
-  font-family:var(--mono);font-size:.75rem;color:var(--teal);
-  border:1px solid rgba(100,255,218,.25);padding:.3rem .85rem;border-radius:4px;
-  transition:background .2s;
-}
-.feat-expand-links a:hover{background:var(--teal-dim)}
-
-/* impact stats row */
-.feat-impacts{
-  display:flex;flex-wrap:wrap;gap:.75rem;
-  margin-bottom:1.25rem;
-}
-.feat-impact-item{
-  display:flex;align-items:baseline;gap:.6rem;
-  background:var(--navy3);border:1px solid var(--border);
-  border-radius:6px;padding:.6rem .9rem;flex:1;min-width:160px;
-}
-.feat-impact-num{
-  font-family:var(--mono);font-size:1.1rem;font-weight:600;
-  color:var(--teal);white-space:nowrap;flex-shrink:0;
-}
-.feat-impact-label{font-size:.75rem;color:var(--muted);line-height:1.5}
-
-/* ── SHOW MORE ──────────────────────── */
-.show-more-btn{
-  display:inline-flex;align-items:center;gap:.6rem;
-  font-family:var(--mono);font-size:.78rem;color:var(--teal);
-  border:1px solid var(--teal);padding:.55rem 1.25rem;border-radius:4px;
-  margin-top:1.75rem;cursor:pointer;background:none;transition:background .2s;
-}
-.show-more-btn:hover{background:var(--teal-dim)}
-.show-more-btn svg{width:14px;height:14px;fill:currentColor;transition:transform .25s}
-.show-more-btn.open svg{transform:rotate(180deg)}
-.more-list{display:none;flex-direction:column;margin-top:1.25rem;border:1px solid var(--border);border-radius:6px;overflow:hidden}
-.more-list.open{display:flex}
-.more-item{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--border);transition:background .2s;gap:1rem}
-.more-item:last-child{border-bottom:none}
-.more-item:hover{background:var(--navy2)}
-.more-name{font-size:.88rem;color:var(--white);font-weight:500}
-.more-company{font-family:var(--mono);font-size:.7rem;color:var(--muted)}
-.more-links{display:flex;gap:.75rem;flex-shrink:0}
-.more-links a{color:var(--muted);font-family:var(--mono);font-size:.72rem;display:flex;align-items:center;gap:.35rem;transition:color .2s;white-space:nowrap}
-.more-links a:hover{color:var(--teal)}
-.more-links svg{width:13px;height:13px;fill:currentColor}
-
-/* ── CONTRIB CARD ───────────────────── */
-.contrib-card{
-  margin-top:1.75rem;
-  background:var(--navy2);
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:1.5rem;
-}
-.contrib-header{
-  display:flex;justify-content:space-between;align-items:flex-start;
-  flex-wrap:wrap;gap:1rem;
-}
-.contrib-label{
-  font-family:var(--mono);font-size:.65rem;text-transform:uppercase;
-  letter-spacing:.12em;color:var(--teal);margin-bottom:.35rem;
-}
-.contrib-title{
-  font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.4rem;
-}
-.contrib-desc{font-size:.82rem;color:var(--muted);line-height:1.7;max-width:400px}
-.contrib-store-link{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--mono);font-size:.72rem;color:var(--teal);
-  border:1px solid rgba(100,255,218,.25);padding:.4rem .9rem;
-  border-radius:4px;white-space:nowrap;transition:background .2s;flex-shrink:0;
-}
-.contrib-store-link:hover{background:var(--teal-dim)}
-.contrib-store-link svg{width:14px;height:14px}
-.contrib-list{
-  display:none;flex-direction:column;
-  margin-top:1rem;border:1px solid var(--border);
-  border-radius:6px;overflow:hidden;
-}
-.contrib-list.open{display:flex}
-.personal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
-.pers-card{background:var(--navy2);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
-.pers-card:hover{border-color:rgba(100,255,218,.3);transform:translateY(-4px)}
-.pers-thumb{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--navy3)}
-.pers-thumb img{width:100%;height:100%;object-fit:cover;opacity:.75;transition:opacity .2s;display:block}
-.pers-card:hover .pers-thumb img{opacity:1}
-.pers-thumb-fallback{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem}
-.pers-body{padding:1rem 1.1rem;flex:1;display:flex;flex-direction:column}
-.pers-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.6rem}
-.pers-folder{width:34px;height:34px;fill:var(--teal)}
-.pers-links-top{display:flex;gap:.65rem}
-.pers-links-top a{color:var(--muted);transition:color .2s;display:flex}
-.pers-links-top a:hover{color:var(--teal)}
-.pers-links-top svg{width:17px;height:17px;fill:currentColor}
-.pers-title{font-size:.95rem;font-weight:600;color:var(--white);margin-bottom:.5rem;transition:color .2s}
-.pers-card:hover .pers-title{color:var(--teal)}
-.pers-desc{font-size:.8rem;line-height:1.7;color:var(--muted);flex:1}
-.pers-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.85rem;list-style:none;padding:0}
-.pers-tag{
-  font-family:var(--mono);
-  font-size:.7rem;
-  color:var(--muted);
-  background:var(--navy3);
-  border:1px solid var(--border);
-  padding:.18rem .6rem;
-  border-radius:50px;
-}
-
-/* ── CONTACT ────────────────────────── */
-.contact-section{text-align:center;padding:1rem 0 0}
-.contact-section h2{font-size:clamp(1.5rem,2.5vw,2rem);font-weight:600;color:var(--white);margin-bottom:.9rem;letter-spacing:-.01em}
-.contact-section p{font-size:.9rem;max-width:440px;margin:0 auto 2rem;line-height:1.85}
-.btn-teal{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--teal);color:var(--teal);padding:.9rem 1.75rem;border-radius:4px;font-family:var(--mono);font-size:.82rem;transition:background .2s}
-.btn-teal:hover{background:var(--teal-dim)}
-.footer-note{margin-top:4rem;font-family:var(--mono);font-size:.7rem;color:var(--muted);text-align:center;line-height:2.2}
-.footer-note a{color:var(--muted);border-bottom:1px solid var(--border);transition:color .2s,border-color .2s}
-.footer-note a:hover{color:var(--teal);border-color:var(--teal)}
-
-/* ── MOBILE ─────────────────────────── */
-@media(max-width:860px){
-  .container{grid-template-columns:1fr;padding:0 1.75rem}
-  .left{position:static;height:auto;padding:3.5rem 0 1.5rem}
-  .sidenav{display:none}
-  .right{padding:2rem 0 4rem;gap:5rem}
-  .feat-summary{grid-template-columns:80px 1fr auto;gap:1rem}
-  .feat-thumb-fallback{font-size:1.5rem}
-  .personal-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
-  .soft-grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  #hero { padding: 90px 20px 50px; }
+  section { padding: 60px 20px; }
+  footer { padding: 20px; }
+  .work-body-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 0; }
+  .stat { padding: 16px 24px 16px 0; margin-right: 24px; }
+  .work-card-right { display: none; }
+  .scroll-hint { left: 20px; }
 }
 </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- ═══ LEFT ═══════════════════════════════════════ -->
-  <aside class="left">
-    <div>
-      <p class="intro-tag">Hi, my name is</p>
-      <h1>Tonoy Chakraborty</h1>
-      <h2>Unity Developer</h2>
-      <p>Unity engineer with 9+ years in mobile game development and 2+ years leading teams. Cross-platform, gameplay, UI, live-ops, porting, plugins, etc.</p>
-      <nav class="sidenav">
-        <a href="#professional" class="active"><span class="nl"></span>Professional</a>
-        <a href="#personal"><span class="nl"></span>Personal</a>
-        <a href="#skills"><span class="nl"></span>Skills</a>
-        <a href="#contact"><span class="nl"></span>Contact</a>
-      </nav>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-prompt">tonoy@dev</span><span class="nav-dir">:~$</span>
+    <span class="nav-cursor"></span>
+  </div>
+  <div class="nav-links">
+    <a href="#work">work</a>
+    <a href="#projects">projects</a>
+    <a href="#skills">skills</a>
+    <a href="#contact" class="nav-contact-btn">contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-scanline"></div>
+  <div class="hero-top">
+    <div class="hero-terminal-line"><span class="p">$ </span><span class="c">cat profile.txt</span></div>
+    <h1 class="hero-name">Tonoy Chakraborty<span class="hero-name-cursor"></span></h1>
+    <div class="hero-role">// Unity Engineer <span>·</span> 9+ Years <span>·</span> Mobile <span>·</span> Cross-Platform</div>
+    <p class="hero-bio">
+      Unity engineer specialising in <em>cross-platform porting</em>, <em>live-ops pipelines</em> and <em>gameplay systems</em>.
+      Shipped 10+ titles across iOS, Android, Steam and Nintendo Switch.
+      Led the Unity 2020 → 6 migration and porting of Arcane Rush to 4 platforms.
+      2+ years leading engineering teams. Based in Hanoi — open to relocation.
+    </p>
+    <div class="hero-btns">
+      <a href="#work" class="btn-primary">[ view_work() ]</a>
+      <a href="#contact" class="btn-secondary">[ contact() ]</a>
+      <a href="https://linkedin.com/in/tonoy-chakraborty-9b703097" target="_blank" rel="noopener" class="btn-secondary">[ linkedin↗ ]</a>
     </div>
-    <div class="socials">
-      <a href="https://github.com/tonoychan" target="_blank" title="GitHub">
-        <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">9+</div><div class="stat-label">YEARS_EXPERIENCE</div></div>
+      <div class="stat"><div class="stat-num">10+</div><div class="stat-label">TITLES_SHIPPED</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">PLATFORMS</div></div>
+      <div class="stat"><div class="stat-num">2+</div><div class="stat-label">YEARS_LEADING</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint">// scroll_down() ↓</div>
+</section>
+
+<!-- PROFESSIONAL WORK -->
+<section id="work">
+  <div class="section-header reveal">
+    <div class="section-cmd"><span class="p">$ </span><span class="c">ls work/ --sort=recent --details</span></div>
+    <h2 class="section-title">Professional <span>Projects</span></h2>
+  </div>
+
+  <div class="work-featured reveal">
+
+    <!-- ARCANE RUSH -->
+    <div class="work-card open">
+      <div class="work-card-header" onclick="toggleCard(this)">
+        <div class="work-card-left">
+          <div class="work-card-index">01</div>
+          <div class="work-card-info">
+            <div class="work-card-title">Arcane Rush Battlegrounds</div>
+            <div class="work-card-meta">Gear Games · Lead Improvement & Porting Engineer</div>
+          </div>
+        </div>
+        <div class="work-card-right">
+          <div class="work-card-year">2024–2026</div>
+          <div class="work-card-tags">
+            <span class="tag green">iOS</span>
+            <span class="tag green">Android</span>
+            <span class="tag green">Steam</span>
+            <span class="tag green">Switch</span>
+          </div>
+        </div>
+        <div class="work-card-toggle">+</div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-highlights">
+          <div class="work-highlight"><strong>40%</strong> faster workflow via AI-assisted shader refactoring</div>
+          <div class="work-highlight"><strong>30%</strong> smaller build size via custom asset optimisation</div>
+          <div class="work-highlight"><strong>4</strong> platforms shipped simultaneously</div>
+        </div>
+        <div class="work-body-grid">
+          <div class="work-body-col">
+            <div class="work-body-label">// PORTING</div>
+            <ul class="work-body-points">
+              <li>Architected "Platform-First" single Unity codebase supporting iOS, Android, Steam and Switch with 100% feature parity</li>
+              <li>Designed platform separation using Prefab Variants, ODL files, Preprocessor Directives and Assembly References</li>
+              <li>Built custom Input System on top of Unity's new Input System for keyboard, mouse, gamepad and Steam Deck</li>
+              <li>Added Nintendo Switch to the pipeline using the same approach established for Steam</li>
+              <li>Collaborated with server-side team to bridge mobile APIs to Steam, including MicroTransaction support</li>
+            </ul>
+          </div>
+          <div class="work-body-col">
+            <div class="work-body-label">// IMPROVEMENT & MIGRATION</div>
+            <ul class="work-body-points">
+              <li>Set up Jenkins CI/CD build scripts for Steam and Nintendo; added CLI-based direct upload to Steam</li>
+              <li>Led Unity 2020 → Unity 6 migration, resolved plugin incompatibilities using AI-assisted workflow</li>
+              <li>Recreated UI effects and particles using Shader Graph and VFX Graph, eliminating legacy dependencies</li>
+              <li>Improved Localization pipeline and Addressables workflows across all platforms</li>
+              <li>Optimised Client-Server API calls, improved real-time data sync and reduced API call overhead</li>
+            </ul>
+          </div>
+        </div>
+        <div class="work-links">
+          <a href="https://play.google.com/store/apps/details?id=com.alleylabs.battlegrounds" target="_blank" rel="noopener" class="work-link">Play Store ↗</a>
+          <a href="https://store.steampowered.com/app/1491880/Arcane_Rush_Battlegrounds/" target="_blank" rel="noopener" class="work-link">Steam ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- TROLLS -->
+    <div class="work-card">
+      <div class="work-card-header" onclick="toggleCard(this)">
+        <div class="work-card-left">
+          <div class="work-card-index">02</div>
+          <div class="work-card-info">
+            <div class="work-card-title">Trolls — Apple Arcade (DreamWorks IP)</div>
+            <div class="work-card-meta">Gear Games · Lead Client Engineer</div>
+          </div>
+        </div>
+        <div class="work-card-right">
+          <div class="work-card-year">2022–2023</div>
+          <div class="work-card-tags">
+            <span class="tag green">iOS</span>
+            <span class="tag green">iPadOS</span>
+            <span class="tag green">tvOS</span>
+            <span class="tag green">Apple Arcade</span>
+          </div>
+        </div>
+        <div class="work-card-toggle">+</div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-highlights">
+          <div class="work-highlight"><strong>3</strong> platforms — iOS, iPadOS, tvOS</div>
+          <div class="work-highlight"><strong>60/40</strong> daily split — own tasks vs reviews & client meetings</div>
+          <div class="work-highlight"><strong>0</strong> launch blockers — critical tvOS crash traced and resolved pre-launch</div>
+        </div>
+        <div class="work-body-grid">
+          <div class="work-body-col">
+            <div class="work-body-label">// APPLE ARCADE FEATURES</div>
+            <ul class="work-body-points">
+              <li>Removed IAP and Ads; implemented fully offline gameplay per Apple Arcade requirements</li>
+              <li>Added Multi-User Profile support and 3-slot save game system</li>
+              <li>Reworked save system to use Apple Cloud Save</li>
+              <li>Added Localization support for multi-region Arcade release</li>
+              <li>Implemented full input support for tvOS: touch, gamepad and Apple TV Remote across stacked UI flows</li>
+            </ul>
+          </div>
+          <div class="work-body-col">
+            <div class="work-body-label">// LEADERSHIP & DELIVERY</div>
+            <ul class="work-body-points">
+              <li>Created High-Level (management) and Low-Level (in-team) timelines with per-member task ownership</li>
+              <li>Investigated and resolved critical tvOS launch crash traced to PlayerPrefs</li>
+              <li>Coordinated with Art, Design and other discipline leads on delivery timelines</li>
+              <li>Led weekly client meetings with Apple and DreamWorks, translated technical caveats for non-technical stakeholders</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOD TRUCK CHEF -->
+    <div class="work-card">
+      <div class="work-card-header" onclick="toggleCard(this)">
+        <div class="work-card-left">
+          <div class="work-card-index">03</div>
+          <div class="work-card-info">
+            <div class="work-card-title">Food Truck Chef</div>
+            <div class="work-card-meta">Nukebox Studios · Unity Developer</div>
+          </div>
+        </div>
+        <div class="work-card-right">
+          <div class="work-card-year">2017–2020</div>
+          <div class="work-card-tags">
+            <span class="tag green">iOS</span>
+            <span class="tag green">Android</span>
+            <span class="tag">LiveOps</span>
+            <span class="tag">IAP</span>
+          </div>
+        </div>
+        <div class="work-card-toggle">+</div>
+      </div>
+      <div class="work-card-body">
+        <div class="work-highlights">
+          <div class="work-highlight"><strong>3</strong> titles powered by systems I built</div>
+          <div class="work-highlight"><strong>0</strong> regression launches via custom Editor validation tools</div>
+          <div class="work-highlight"><strong>60%</strong> fewer hotfix launches via build checklists</div>
+        </div>
+        <div class="work-body-grid">
+          <div class="work-body-col">
+            <div class="work-body-label">// SYSTEMS BUILT</div>
+            <ul class="work-body-points">
+              <li>Architected centralised Popup Manager — layering, priority queues and state management; ported to Chef Cat Ava and SpongeBob</li>
+              <li>Built Designer-Friendly Localization Manager for global releases — non-engineers could validate string data without code</li>
+              <li>"One Feature at a Time" refactoring strategy reduced build crashes and technical debt over 3 years</li>
+              <li>Integrated IAP and full ads mediation stack; adopted as studio standard across multiple titles</li>
+            </ul>
+          </div>
+          <div class="work-body-col">
+            <div class="work-body-label">// TOOLING & LEADERSHIP</div>
+            <ul class="work-body-points">
+              <li>Built custom Developer Tools for QA and Design teams — rapid data validation and automated testing</li>
+              <li>Acted as primary technical liaison between Art, QA and Production teams</li>
+              <li>Coding standards introduced became the blueprint for SpongeBob: Krusty Cook-Off development</li>
+              <li>Coordinated feature-specific developer teams, aligned engineering output with producer timelines</li>
+            </ul>
+          </div>
+        </div>
+        <div class="work-links">
+          <a href="https://play.google.com/store/apps/details?id=com.restaurant.foodtruck.cooking.chef" target="_blank" rel="noopener" class="work-link">Play Store ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECONDARY TITLES -->
+  <div class="reveal">
+    <div class="work-secondary-label">// other_titles</div>
+    <div class="work-secondary-grid">
+      <div class="work-secondary-item">
+        <div class="work-sec-title">XCOM Legends</div>
+        <div class="work-sec-company">Gear Games</div>
+        <a href="https://xcom-legends.en.uptodown.com/android" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">SpongeBob: Krusty Cook-Off</div>
+        <div class="work-sec-company">Nukebox Studios</div>
+        <a href="https://play.google.com/store/apps/details?id=com.tiltingpoint.spongebob" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">MyVegas Bingo</div>
+        <div class="work-sec-company">Gear Games</div>
+        <a href="https://www.playstudios.com/myvegas-bingo/" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">M&M Adventure</div>
+        <div class="work-sec-company">Gear Games</div>
+        <a href="https://m-m-s-tilting-point.en.aptoide.com/app" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">Chef Cat Ava</div>
+        <div class="work-sec-company">Nukebox Studios</div>
+        <a href="https://play.google.com/store/apps/details?id=com.cooking.games.chef.cat.ava.delicious.tasty.food.restaurant.kitchen.diner.cafe.dairy.fever.craze" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">Room Flip</div>
+        <div class="work-sec-company">Nukebox Studios</div>
+        <a href="https://play.google.com/store/apps/details?id=com.roomflip.home.design.games" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">VR Room Walk</div>
+        <div class="work-sec-company">Virtualinfocom</div>
+        <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.vrhome" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">VR Car Race</div>
+        <div class="work-sec-company">Virtualinfocom</div>
+        <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.vr.racing" target="_blank" rel="noopener" class="work-sec-link">↗ view</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MIDNITE OWLS -->
+  <div class="reveal" style="margin-top:32px;">
+    <div class="work-secondary-label">// open_contribution — Midnite Owls (indie studio)</div>
+    <div class="work-secondary-grid">
+      <div class="work-secondary-item">
+        <div class="work-sec-title">Word Cross Puzzle</div>
+        <div class="work-sec-company">Midnite Owls</div>
+        <a href="https://play.google.com/store/apps/details?id=com.miniteowls.wcp" target="_blank" rel="noopener" class="work-sec-link">↗ Play Store</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">Tile Match</div>
+        <div class="work-sec-company">Midnite Owls</div>
+        <a href="https://play.google.com/store/apps/details?id=com.midniteowls.tilematch" target="_blank" rel="noopener" class="work-sec-link">↗ Play Store</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">Stack Overflow — Blocks</div>
+        <div class="work-sec-company">Midnite Owls</div>
+        <a href="https://play.google.com/store/apps/details?id=com.MidniteOwls.StackBlocks" target="_blank" rel="noopener" class="work-sec-link">↗ Play Store</a>
+      </div>
+      <div class="work-secondary-item">
+        <div class="work-sec-title">Naughty Owl</div>
+        <div class="work-sec-company">Midnite Owls</div>
+        <a href="https://play.google.com/store/apps/details?id=com.MidNiteOwls.NaughtyOwl" target="_blank" rel="noopener" class="work-sec-link">↗ Play Store</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAL PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <div class="section-cmd"><span class="p">$ </span><span class="c">ls projects/ --type=personal</span></div>
+    <h2 class="section-title">Personal <span>Projects</span></h2>
+  </div>
+  <div class="projects-grid reveal">
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <span class="project-type">ONGOING</span>
+        <a href="https://github.com/Tonoychan/Student-Sim" target="_blank" rel="noopener" class="project-link-icon">↗</a>
+      </div>
+      <div class="project-title">Indian Student Simulator</div>
+      <div class="project-desc">A Unity student life simulator. Daily choices affect score, stamina and exam results. ScriptableObject-driven data architecture with custom Shader Graph visuals.</div>
+      <div class="project-tags">
+        <span class="project-tag">Unity 6</span>
+        <span class="project-tag">C#</span>
+        <span class="project-tag">ShaderLab</span>
+        <span class="project-tag">HLSL</span>
+        <span class="project-tag">Android</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <span class="project-type">COMPLETE</span>
+        <a href="https://github.com/Tonoychan/TicTacToe-Netcode" target="_blank" rel="noopener" class="project-link-icon">↗</a>
+      </div>
+      <div class="project-title">TicTacToe — Netcode for GameObjects</div>
+      <div class="project-desc">Online multiplayer Tic-Tac-Toe built following Code Monkey's YouTube course. Covers NetworkVariables, ServerRpc, ClientRpc, lobby system and rematch flow.</div>
+      <div class="project-tags">
+        <span class="project-tag">Unity</span>
+        <span class="project-tag">C#</span>
+        <span class="project-tag">NGO</span>
+        <span class="project-tag">Multiplayer</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <span class="project-type">COMPLETE</span>
+        <a href="https://github.com/Tonoychan/SpaceShooterAdvance" target="_blank" rel="noopener" class="project-link-icon">↗</a>
+      </div>
+      <div class="project-title">Space Shooter Advance</div>
+      <div class="project-desc">Advanced 2D space shooter with custom URP shaders, ScriptableObject architecture, enemy wave patterns and professional Git workflow with PR templates and SOLID standards.</div>
+      <div class="project-tags">
+        <span class="project-tag">Unity</span>
+        <span class="project-tag">C#</span>
+        <span class="project-tag">URP</span>
+        <span class="project-tag">ShaderLab</span>
+        <span class="project-tag">SOLID</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <span class="project-type">COMPLETE</span>
+        <a href="https://github.com/Tonoychan/3D-MemoryPuzzle" target="_blank" rel="noopener" class="project-link-icon">↗</a>
+      </div>
+      <div class="project-title">3D Memory Puzzle</div>
+      <div class="project-desc">3D card-matching memory game. Focus on smooth 3D flip animations, scalable board generation and clean game state management. Uses Git LFS for asset storage.</div>
+      <div class="project-tags">
+        <span class="project-tag">Unity</span>
+        <span class="project-tag">C#</span>
+        <span class="project-tag">URP</span>
+        <span class="project-tag">Git LFS</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <span class="project-type">COMPLETE</span>
+        <a href="https://github.com/Tonoychan/Fishnet-Demo-1" target="_blank" rel="noopener" class="project-link-icon">↗</a>
+      </div>
+      <div class="project-title">Fish-Net Demo — Coin Collector</div>
+      <div class="project-desc">Multiplayer coin collection game built with Fish-Net v4. Server-authoritative coin spawning, networked player movement and synced scoreboard. Explored Fish-Net vs NGO differences.</div>
+      <div class="project-tags">
+        <span class="project-tag">Unity 6</span>
+        <span class="project-tag">C#</span>
+        <span class="project-tag">Fish-Net v4</span>
+        <span class="project-tag">Multiplayer</span>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-card-top">
+        <span class="project-type">COMPLETE</span>
+        <a href="https://github.com/Tonoychan/MySQL-php-unity" target="_blank" rel="noopener" class="project-link-icon">↗</a>
+      </div>
+      <div class="project-title">MySQL + PHP + Unity Backend</div>
+      <div class="project-desc">Udemy project. Full-stack Unity game backend connecting a C# client to MySQL via PHP middleware. Covers UnityWebRequest, password hashing, JSON responses and SQL injection prevention.</div>
+      <div class="project-tags">
+        <span class="project-tag">Unity</span>
+        <span class="project-tag">C#</span>
+        <span class="project-tag">PHP</span>
+        <span class="project-tag">MySQL</span>
+        <span class="project-tag">Backend</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <div class="section-cmd"><span class="p">$ </span><span class="c">cat skills.json | jq '.'</span></div>
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+  </div>
+
+  <div class="skills-grid reveal">
+
+    <div class="skill-group">
+      <div class="skill-group-header">
+        <span class="skill-group-icon">//</span>
+        <span class="skill-group-name">LANGUAGES</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">C#</span>
+        <span class="skill-tag primary">JavaScript / TypeScript</span>
+        <span class="skill-tag">C++</span>
+        <span class="skill-tag">Python</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-header">
+        <span class="skill-group-icon">//</span>
+        <span class="skill-group-name">UNITY EXPERTISE</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">Unity</span>
+        <span class="skill-tag primary">OOP / SOLID</span>
+        <span class="skill-tag primary">uGUI</span>
+        <span class="skill-tag primary">Addressables</span>
+        <span class="skill-tag primary">LiveOps</span>
+        <span class="skill-tag primary">Editor Tooling</span>
+        <span class="skill-tag primary">Localization</span>
+        <span class="skill-tag primary">VFX Graph</span>
+        <span class="skill-tag primary">Shader Graph</span>
+        <span class="skill-tag">UI Toolkit</span>
+        <span class="skill-tag">Fish-Net</span>
+        <span class="skill-tag">Netcode for GOs</span>
+        <span class="skill-tag">UGS</span>
+        <span class="skill-tag muted">DOTS / ECS</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-header">
+        <span class="skill-group-icon">//</span>
+        <span class="skill-group-name">PLATFORMS</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">iOS</span>
+        <span class="skill-tag primary">Android</span>
+        <span class="skill-tag primary">PC / Steam</span>
+        <span class="skill-tag primary">Nintendo Switch</span>
+        <span class="skill-tag primary">Apple Arcade</span>
+        <span class="skill-tag muted">Netflix</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-header">
+        <span class="skill-group-icon">//</span>
+        <span class="skill-group-name">SDKs & INTEGRATIONS</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">IAP</span>
+        <span class="skill-tag primary">Firebase</span>
+        <span class="skill-tag primary">LevelPlay Ads</span>
+        <span class="skill-tag primary">Amazon S3</span>
+        <span class="skill-tag">UGS</span>
+        <span class="skill-tag">Unity Playworks</span>
+        <span class="skill-tag">WebSockets</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-header">
+        <span class="skill-group-icon">//</span>
+        <span class="skill-group-name">DEVOPS & TOOLS</span>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag primary">GitHub / GitLab</span>
+        <span class="skill-tag primary">Jenkins</span>
+        <span class="skill-tag primary">GitHub Actions</span>
+        <span class="skill-tag primary">Jira</span>
+        <span class="skill-tag primary">Confluence</span>
+        <span class="skill-tag primary">Figma</span>
+        <span class="skill-tag">ClickUp</span>
+        <span class="skill-tag muted">Docker</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="skills-note reveal" style="margin-top:20px;">
+    <span><span class="swatch p"></span> Proficient</span>
+    <span><span class="swatch m"></span> Some experience</span>
+    <span style="color:var(--text-muted)">// muted = learning / early exposure</span>
+  </div>
+
+  <!-- SOFT SKILLS -->
+  <div class="reveal" style="margin-top:48px;">
+    <div class="section-cmd" style="margin-bottom:16px;"><span class="p">$ </span><span class="c">cat soft_skills.txt</span></div>
+    <div class="soft-grid">
+      <div class="soft-card">
+        <div class="soft-card-top">
+          <span class="soft-icon">⬡</span>
+          <span class="soft-title">Architecture</span>
+        </div>
+        <div class="soft-desc">Defined Unity architecture standards and C# best practices adopted studio-wide at Gear Games.</div>
+      </div>
+      <div class="soft-card">
+        <div class="soft-card-top">
+          <span class="soft-icon">⬡</span>
+          <span class="soft-title">1:1 Mentorship</span>
+        </div>
+        <div class="soft-desc">Led regular 1:1s and mentoring sessions for junior engineers at Gear Games and Nukebox Studios.</div>
+      </div>
+      <div class="soft-card">
+        <div class="soft-card-top">
+          <span class="soft-icon">⬡</span>
+          <span class="soft-title">Code Reviewer</span>
+        </div>
+        <div class="soft-desc">Enforced Unity architecture and C# standards through structured code reviews across the full project team.</div>
+      </div>
+      <div class="soft-card">
+        <div class="soft-card-top">
+          <span class="soft-icon">⬡</span>
+          <span class="soft-title">Stakeholder Alignment</span>
+        </div>
+        <div class="soft-desc">Collaborated with Art, Design, Product and senior management to align roadmap priorities and ensure on-time delivery.</div>
+      </div>
+      <div class="soft-card">
+        <div class="soft-card-top">
+          <span class="soft-icon">⬡</span>
+          <span class="soft-title">Agile / Scrum</span>
+        </div>
+        <div class="soft-desc">Ran daily standups, sprint planning and monthly technical improvement plans.</div>
+      </div>
+      <div class="soft-card">
+        <div class="soft-card-top">
+          <span class="soft-icon">⬡</span>
+          <span class="soft-title">Multi-Platform Delivery</span>
+        </div>
+        <div class="soft-desc">Led simultaneous porting of Arcane Rush from mobile to Steam and Nintendo Switch.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-cmd"><span class="p">$ </span><span class="c">./contact.sh --open</span></div>
+    <h2 class="section-title">Get in <span>Touch</span></h2>
+  </div>
+  <div class="contact-inner reveal">
+    <div class="contact-terminal">
+      <div class="contact-terminal-bar">
+        <div class="dot r"></div>
+        <div class="dot y"></div>
+        <div class="dot g"></div>
+        <span class="terminal-title">contact_info.txt</span>
+      </div>
+      <div class="contact-terminal-body">
+        <div class="contact-line"><span class="p">const</span> <span class="k">engineer</span> = {</div>
+        <div class="contact-line" style="padding-left:20px"><span class="k">name</span>: <span class="s">"Tonoy Chakraborty"</span>,</div>
+        <div class="contact-line" style="padding-left:20px"><span class="k">role</span>: <span class="s">"Unity Engineer"</span>,</div>
+        <div class="contact-line" style="padding-left:20px"><span class="k">location</span>: <span class="s">"Hanoi, Vietnam"</span>,</div>
+        <div class="contact-line" style="padding-left:20px"><span class="k">openTo</span>: <span class="s">"New opportunities — preferably 3D, open to 2D"</span>,</div>
+        <div class="contact-line" style="padding-left:20px"><span class="k">relocation</span>: <span class="c">true</span></div>
+        <div class="contact-line">};</div>
+      </div>
+    </div>
+
+    <div class="contact-links">
+      <a href="mailto:tonoychan55@gmail.com" class="contact-link-item">
+        <span class="contact-link-label">// email</span>
+        <span class="contact-link-val">tonoychan55@gmail.com</span>
+        <span class="contact-link-arrow">→</span>
       </a>
-      <a href="https://www.linkedin.com/in/tonoy-chakraborty-9b703097/" target="_blank" title="LinkedIn">
-        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      <a href="https://linkedin.com/in/tonoy-chakraborty-9b703097" target="_blank" rel="noopener" class="contact-link-item">
+        <span class="contact-link-label">// linkedin</span>
+        <span class="contact-link-val">linkedin.com/in/tonoy-chakraborty</span>
+        <span class="contact-link-arrow">↗</span>
       </a>
-      <a href="mailto:tonoychan55@gmail.com" title="Email">
-        <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
-      </a>
-      <a href="https://tonoychan55.wixsite.com/tonoychandev" target="_blank" title="Previous Website">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15v-4H7l5-8v4h4l-5 8z"/></svg>
+      <a href="https://github.com/tonoychan" target="_blank" rel="noopener" class="contact-link-item">
+        <span class="contact-link-label">// github</span>
+        <span class="contact-link-val">github.com/tonoychan</span>
+        <span class="contact-link-arrow">↗</span>
       </a>
     </div>
-  </aside>
 
-  <!-- ═══ RIGHT ══════════════════════════════════════ -->
-  <main class="right" id="content">
+    <div class="contact-cta">
+      Currently open to new opportunities. Got a technical or management problem you're wrestling with?<br>
+      Let's talk it through over a <em>beer</em> or a <em>game night</em>.
+    </div>
+  </div>
+</section>
 
-    <!-- ── PROFESSIONAL ──────────────────────────────── -->
-    <section id="professional">
-      <p class="sec-label">Work</p>
-      <h2 class="sec-title">Professional projects</h2>
-      <p class="sec-sub">Click any project to see what I worked on.</p>
-
-      <div class="featured-list">
-
-        <!-- ── ARCANE RUSH ── -->
-        <div class="feat-card" onclick="toggleCard(this)">
-          <div class="feat-summary">
-            <div class="feat-thumb">
-              <img src="images/arcane-cover.png" alt="Arcane Rush Battlegrounds"/>
-            </div>
-            <div class="feat-body">
-              <p class="feat-company">Gear Games &nbsp;·&nbsp; 2022–2026</p>
-              <h3 class="feat-title">Arcane Rush Battlegrounds</h3>
-              <p class="feat-desc">Async multiplayer strategy card auto-battler for iOS, Android, Steam and Nintendo Switch.</p>
-              <ul class="feat-tags">
-                <li class="feat-tag">Unity</li><li class="feat-tag">C#</li>
-                <li class="feat-tag">Addressables</li><li class="feat-tag">Jenkins</li>
-                <li class="feat-tag">iOS</li><li class="feat-tag">Android</li>
-                <li class="feat-tag">Steam</li><li class="feat-tag">Switch</li>
-              </ul>
-            </div>
-            <div class="feat-chevron">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-          </div>
-          <div class="feat-expand">
-            <div class="feat-expand-inner">
-              <div class="feat-role-badge">Lead Improvement &amp; Porting Engineer · 2 years (2024–2026)</div>
-
-              <!-- Impact stats -->
-              <div class="feat-impacts">
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">40%</span>
-                  <span class="feat-impact-label">Faster workflow via AI-assisted shader refactoring &amp; legacy plugin removal</span>
-                </div>
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">30%</span>
-                  <span class="feat-impact-label">Smaller build size via custom asset optimisation &amp; separate ODL files</span>
-                </div>
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">4</span>
-                  <span class="feat-impact-label">Platforms shipped — iOS, Android, Steam (Win/Mac/Deck), Nintendo Switch</span>
-                </div>
-              </div>
-
-              <div class="feat-expand-cols">
-                <div>
-                  <p class="feat-expand-label">Porting</p>
-                  <ul class="feat-expand-list">
-                    <li>Architected a "Platform-First" single Unity codebase supporting iOS, Android, Steam and Nintendo Switch with 100% feature parity.</li>
-                    <li>Designed platform separation using Prefab Variants, separate asset ODL files, Preprocessor Directives and Assembly References.</li>
-                    <li>Led Keyboard, Mouse, GamePad and Steam Deck input support, built a custom Input System on top of Unity's new Input System to match game and design needs.</li>
-                    <li>Added Nintendo Switch to the pipeline using the same approach established for Steam.</li>
-                    <li>Collaborated with server-side team to bridge mobile APIs to Steam, including MicroTransaction support.</li>
-                  </ul>
-                </div>
-                <div>
-                  <p class="feat-expand-label">Improvement</p>
-                  <ul class="feat-expand-list">
-                    <li>Set up Jenkins CI/CD build scripts for Steam and Nintendo, extended existing mobile Groovy scripts, added CLI-based direct upload to Steam.</li>
-                    <li>Led Unity 2020 to Unity 6 migration, resolved plugin incompatibilities using AI-assisted workflow to recreate UI effects, particle effects using Shader Graph and VFX Graph, eliminating legacy dependencies.</li>
-                    <li>Improved Localization pipeline and Addressables workflows, optimised asset streaming and memory usage across all platforms.</li>
-                    <li>Optimised Client-Server API calls, improved real-time data sync and reduced API call overhead across multi-platform deployments.</li>
-                    <li>Updated and maintained key plugins including Ads mediation, IAP, and Marketing attribution (Adjust).</li>
-                    <li>Established cross-platform best practices for the engineering team, features built mobile-first work on Steam without extra effort.</li>
-                    <li>Facilitated knowledge transfer and documented the Steam dashboard workflow for the team.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="feat-expand-links">
-                <a href="https://play.google.com/store/apps/details?id=com.alleylabs.battlegrounds" target="_blank" onclick="event.stopPropagation()">Play Store ↗</a>
-                <a href="https://store.steampowered.com/app/1491880/Arcane_Rush_Battlegrounds/" target="_blank" onclick="event.stopPropagation()">Steam ↗</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ── TROLLS APPLE ARCADE ── -->
-        <div class="feat-card" onclick="toggleCard(this)">
-          <div class="feat-summary">
-            <div class="feat-thumb">
-              <img src="images/trolls-cover.png" alt="Trolls Apple Arcade"/>
-            </div>
-            <div class="feat-body">
-              <p class="feat-company">Gear Games &nbsp;·&nbsp; Apple &amp; DreamWorks &nbsp;·&nbsp; 2022–2023</p>
-              <h3 class="feat-title">Trolls — Apple Arcade IP</h3>
-              <p class="feat-desc">Led client-side Apple Arcade release of a licensed DreamWorks title across iOS, iPad and tvOS.</p>
-              <ul class="feat-tags">
-                <li class="feat-tag">Unity</li><li class="feat-tag">C#</li>
-                <li class="feat-tag">Apple Arcade</li><li class="feat-tag">tvOS</li>
-                <li class="feat-tag">iOS</li><li class="feat-tag">iPadOS</li>
-                <li class="feat-tag">Cloud Save</li>
-              </ul>
-            </div>
-            <div class="feat-chevron">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-          </div>
-          <div class="feat-expand">
-            <div class="feat-expand-inner">
-              <div class="feat-role-badge">Lead Client Engineer · 1 year (2022–2023)</div>
-
-              <div class="feat-impacts">
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">3</span>
-                  <span class="feat-impact-label">Platforms — iOS, iPadOS, tvOS</span>
-                </div>
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">60/40</span>
-                  <span class="feat-impact-label">Daily split — 60% own tasks, 40% reviews, unblocking team &amp; client meetings</span>
-                </div>
-              </div>
-
-              <div class="feat-expand-cols">
-                <div>
-                  <p class="feat-expand-label">Apple Arcade Features</p>
-                  <ul class="feat-expand-list">
-                    <li>Removed IAP and Ads, implemented fully offline gameplay as per Apple Arcade requirements.</li>
-                    <li>Added Multi-User Profile support and 3 Save Game slot system.</li>
-                    <li>Reworked save system to use Apple Cloud Save.</li>
-                    <li>Added Localization support for multi-region Arcade release.</li>
-                    <li>Implemented full input support for tvOS, touch, gamepad and Apple TV Remote across stacked UI flows.</li>
-                    <li>Game values control via Blueprint system for live configuration.</li>
-                    <li>Stress tested and optimised builds for tvOS performance and graphics.</li>
-                  </ul>
-                </div>
-                <div>
-                  <p class="feat-expand-label">Leadership &amp; Delivery</p>
-                  <ul class="feat-expand-list">
-                    <li>Created High-Level (management) and Low-Level (in-team) timelines with per-member task ownership based on business milestones.</li>
-                    <li>Investigated and resolved critical tvOS blockers, launch crash (traced to PlayerPrefs), performance issues and graphics regressions, documented root causes and fixes.</li>
-                    <li>Coordinated with Art, Design and other discipline leads on delivery timelines and cross-team dependencies.</li>
-                    <li>Led weekly client meetings with Apple and DreamWorks, shared status docs and translated technical caveats into non-technical language.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-        <!-- ── FOOD TRUCK CHEF ── -->
-        <div class="feat-card" onclick="toggleCard(this)">
-          <div class="feat-summary">
-            <div class="feat-thumb">
-              <img src="images/foodtruck-cover.jpg" alt="Food Truck Chef"/>
-            </div>
-            <div class="feat-body">
-              <p class="feat-company">Nukebox Studios &nbsp;·&nbsp; 2017–2020</p>
-              <h3 class="feat-title">Food Truck Chef</h3>
-              <p class="feat-desc">Core Unity developer on Nukebox's flagship LiveOps title — scaled from contributor to primary technical point of contact for Art, QA and Design.</p>
-              <ul class="feat-tags">
-                <li class="feat-tag">Unity</li><li class="feat-tag">C#</li>
-                <li class="feat-tag">LiveOps</li><li class="feat-tag">IAP</li>
-                <li class="feat-tag">iOS</li><li class="feat-tag">Android</li>
-                <li class="feat-tag">Editor Tooling</li>
-              </ul>
-            </div>
-            <div class="feat-chevron">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </div>
-          </div>
-          <div class="feat-expand">
-            <div class="feat-expand-inner">
-              <div class="feat-role-badge">Unity Developer · 3 years (2017–2020)</div>
-
-              <div class="feat-impacts">
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">3</span>
-                  <span class="feat-impact-label">Titles powered by systems I built — Food Truck Chef, Chef Cat Ava &amp; SpongeBob</span>
-                </div>
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">0</span>
-                  <span class="feat-impact-label">Regression launches via Editor tools for data validation on Restaurants, Events &amp; A/B Testing</span>
-                </div>
-                <div class="feat-impact-item">
-                  <span class="feat-impact-num">60%</span>
-                  <span class="feat-impact-label">Fewer hotfix launches via build checklists and automated crash testing tools</span>
-                </div>
-              </div>
-
-              <div class="feat-expand-cols">
-                <div>
-                  <p class="feat-expand-label">Systems Built</p>
-                  <ul class="feat-expand-list">
-                    <li>Architected a centralised Popup Manager, handled layering, priority queues and state management, ported directly into Chef Cat Ava and SpongeBob: Krusty Cook-Off.</li>
-                    <li>Built a Designer-Friendly Localization Manager for global releases, non-engineers could validate and update string data without touching code.</li>
-                    <li>Adopted a "One Feature at a Time" refactoring strategy, upgraded legacy code alongside new feature work, drastically reducing build crashes and technical debt over 3 years.</li>
-                    <li>Integrated IAP and built full ads mediation stack, adopted as the studio standard across multiple titles.</li>
-                  </ul>
-                </div>
-                <div>
-                  <p class="feat-expand-label">Tooling &amp; Leadership</p>
-                  <ul class="feat-expand-list">
-                    <li>Built custom Developer Tools for QA and Design teams, rapid data validation and automated testing shortened cross-department feedback loops significantly.</li>
-                    <li>Acted as primary technical liaison between Art, QA and Production teams.</li>
-                    <li>Coordinated feature-specific developer teams, aligned engineering output with producer timelines and long-term product goals.</li>
-                    <li>Coding standards introduced became the blueprint for SpongeBob: Krusty Cook-Off development.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- SHOW MORE -->
-      <button class="show-more-btn" onclick="toggleMore(this)" aria-expanded="false">
-        Show more
-        <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-      </button>
-
-      <div class="more-list" id="more-list">
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">XCOM Legends</p>
-            <p class="more-company">Gear Games</p>
-          </div>
-          <div class="more-links">
-            <a href="https://xcom-legends.en.uptodown.com/android" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">MyVegas Bingo</p>
-            <p class="more-company">Gear Games</p>
-          </div>
-          <div class="more-links">
-            <a href="https://www.playstudios.com/myvegas-bingo/" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-              Site
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">M&amp;M Adventure</p>
-            <p class="more-company">Gear Games</p>
-          </div>
-          <div class="more-links">
-            <a href="https://m-m-s-tilting-point.en.aptoide.com/app" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">SpongeBob: Krusty Cook-Off</p>
-            <p class="more-company">Nukebox Studios</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.tiltingpoint.spongebob&hl=en" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">Chef Cat Ava</p>
-            <p class="more-company">Nukebox Studios</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.cooking.games.chef.cat.ava.delicious.tasty.food.restaurant.kitchen.diner.cafe.dairy.fever.craze" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">Room Flip</p>
-            <p class="more-company">Nukebox Studios</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.roomflip.home.design.games.decor.decorate.makeover.mansion.style.covet.match3.dressup.fashion" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">VR Room Walk</p>
-            <p class="more-company">Virtualinfocom</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.vrhome" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">Aswathama</p>
-            <p class="more-company">Virtualinfocom</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.Ashwathama" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">VR Car Race</p>
-            <p class="more-company">Virtualinfocom</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.vr.racing" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">Kidnapping</p>
-            <p class="more-company">Virtualinfocom</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.kidnapping" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">Legends Fight</p>
-            <p class="more-company">Virtualinfocom</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.Virtualinfocom.Fightofthelegeds6&hl=en" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-        <div class="more-item">
-          <div>
-            <p class="more-name">Katiya</p>
-            <p class="more-company">Virtualinfocom</p>
-          </div>
-          <div class="more-links">
-            <a href="https://play.google.com/store/apps/details?id=com.virtualinfocom.katya.sword.fighter&hl=en" target="_blank">
-              <svg viewBox="0 0 24 24"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-              Play Store
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── PERSONAL ───────────────────────────────────── -->
-    <section id="personal">
-      <p class="sec-label">Side work</p>
-      <h2 class="sec-title">Personal projects</h2>
-      <p class="sec-sub">Things I build for fun, learning, or just because I wanted them to exist.</p>
-
-      <div class="personal-grid">
-
-        <div class="pers-card">
-          <div class="pers-thumb">
-            <div class="pers-thumb-fallback" style="background:linear-gradient(135deg,#0a2010,#0d3a1a)">🎓</div>
-          </div>
-          <div class="pers-body">
-            <div class="pers-top">
-              <svg class="pers-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-              <div class="pers-links-top">
-                <a href="https://github.com/Tonoychan/Student-Sim" target="_blank" title="GitHub">
-                  <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                </a>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem">
-              <h3 class="pers-title" style="margin-bottom:0">Student Simulator</h3>
-              <span style="font-family:var(--mono);font-size:.62rem;color:var(--teal);background:var(--teal-dim);border:1px solid rgba(100,255,218,.2);padding:.12rem .5rem;border-radius:50px;">Ongoing</span>
-            </div>
-            <p class="pers-desc">A simple linear student life simulator, no heavy graphics. The player makes daily choices that affect score, stamina, and exam results, with a pass/fail class system. Working towards MVP with META features planned.</p>
-            <ul class="pers-tags">
-              <li class="pers-tag">Unity</li>
-              <li class="pers-tag">C#</li>
-              <li class="pers-tag">Simulation</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="pers-card">
-          <div class="pers-thumb">
-            <img src="images/tictactoe-cover.png" alt="TicTacToe Netcode"/>
-          </div>
-          <div class="pers-body">
-            <div class="pers-top">
-              <svg class="pers-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-              <div class="pers-links-top">
-                <a href="https://github.com/Tonoychan/TicTacToe-Netcode" target="_blank" title="GitHub">
-                  <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="pers-title">TicTacToe — Netcode</h3>
-            <p class="pers-desc">Online multiplayer Tic-Tac-Toe built in Unity using Netcode for GameObjects. Built to explore Unity's networking stack and real-time game state sync.</p>
-            <ul class="pers-tags">
-              <li class="pers-tag">Unity</li>
-              <li class="pers-tag">C#</li>
-              <li class="pers-tag">Netcode for GOs</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="pers-card">
-          <div class="pers-thumb">
-            <img src="images/memorypuzzle-cover.png" alt="3D Memory Puzzle"/>
-          </div>
-          <div class="pers-body">
-            <div class="pers-top">
-              <svg class="pers-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-              <div class="pers-links-top">
-                <a href="https://github.com/Tonoychan/3D-MemoryPuzzle" target="_blank" title="GitHub">
-                  <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="pers-title">3D Memory Puzzle</h3>
-            <p class="pers-desc">A 3D card-matching memory puzzle game in Unity. Focus on 3D card flip animations, game state management and scalable board generation.</p>
-            <ul class="pers-tags">
-              <li class="pers-tag">Unity</li>
-              <li class="pers-tag">C#</li>
-              <li class="pers-tag">3D</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="pers-card">
-          <div class="pers-thumb">
-            <img src="images/spaceshooter-cover.png" alt="Space Shooter Advance"/>
-          </div>
-          <div class="pers-body">
-            <div class="pers-top">
-              <svg class="pers-folder" viewBox="0 0 24 24"><path d="M10 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
-              <div class="pers-links-top">
-                <a href="https://github.com/Tonoychan/SpaceShooterAdvance" target="_blank" title="GitHub">
-                  <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-                </a>
-              </div>
-            </div>
-            <h3 class="pers-title">Space Shooter Advance</h3>
-            <p class="pers-desc">An advanced 2D space shooter with enemy wave patterns, power-up systems and a scrolling parallax background. Built to practice clean game architecture.</p>
-            <ul class="pers-tags">
-              <li class="pers-tag">Unity</li>
-              <li class="pers-tag">C#</li>
-              <li class="pers-tag">2D</li>
-            </ul>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- MIDNITE OWLS CONTRIBUTION -->
-      <div class="contrib-card">
-        <div class="contrib-header">
-          <div>
-            <p class="contrib-label">Open Contribution</p>
-            <h3 class="contrib-title">Midnite Owls</h3>
-            <p class="contrib-desc">Contributing to a friend's indie studio — helping out with Unity development across casual mobile titles.</p>
-          </div>
-          <a href="https://play.google.com/store/apps/developer?id=Midnite+Owls" target="_blank" class="contrib-store-link">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-            View on Play Store
-          </a>
-        </div>
-        <button class="show-more-btn" onclick="toggleContrib(this)" aria-expanded="false" style="margin-top:1rem">
-          Show games
-          <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-        </button>
-        <div class="contrib-list" id="contrib-list">
-          <div class="more-item">
-            <div><p class="more-name">Word Cross Puzzle</p><p class="more-company">Midnite Owls</p></div>
-            <div class="more-links">
-              <a href="https://play.google.com/store/apps/details?id=com.miniteowls.wcp" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-                Play Store
-              </a>
-            </div>
-          </div>
-          <div class="more-item">
-            <div><p class="more-name">Tile Match</p><p class="more-company">Midnite Owls</p></div>
-            <div class="more-links">
-              <a href="https://play.google.com/store/apps/details?id=com.midniteowls.tilematch" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-                Play Store
-              </a>
-            </div>
-          </div>
-          <div class="more-item">
-            <div><p class="more-name">Stack Overflow — Blocks Game</p><p class="more-company">Midnite Owls</p></div>
-            <div class="more-links">
-              <a href="https://play.google.com/store/apps/details?id=com.MidniteOwls.StackBlocks" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-                Play Store
-              </a>
-            </div>
-          </div>
-          <div class="more-item">
-            <div><p class="more-name">Naughty Owl</p><p class="more-company">Midnite Owls</p></div>
-            <div class="more-links">
-              <a href="https://play.google.com/store/apps/details?id=com.MidNiteOwls.NaughtyOwl" target="_blank">
-                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.63.24.96.21l12.45-7.19-2.78-2.78-10.63 9.76zm-1.85-21.3A1.98 1.98 0 001 3.96v16.08c0 .55.18 1.05.49 1.44l.08.08 9.01-9.01v-.22L1.33 2.46zm17.4 7.78l-2.66-1.54-3.12 3.12 3.12 3.12 2.67-1.54c.76-.44.76-1.72-.01-2.16zm-16.2 10.57l10.63-9.75-2.78-2.78L.53 18.03l2 2.78z"/></svg>
-                Play Store
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ── SKILLS ───────────────────────────────────── -->
-    <section id="skills">
-      <p class="sec-label">Skills</p>
-      <h2 class="sec-title">Technical skills</h2>
-
-      <div class="skills-legend">
-        <div class="legend-item">
-          <div class="legend-solid"></div>
-          Proficient
-        </div>
-        <div class="legend-item">
-          <div class="legend-dashed"></div>
-          Some experience
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <p class="skill-group-label">Languages</p>
-        <div class="skill-tags">
-          <span class="tag">C#</span>
-          <span class="tag">JS / TS</span>
-          <span class="tag-dim">C++</span>
-          <span class="tag-dim">Python</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <p class="skill-group-label">Unity Expertise</p>
-        <div class="skill-tags">
-          <span class="tag">Unity</span>
-          <span class="tag">OOP / SOLID</span>
-          <span class="tag">uGUI</span>
-          <span class="tag">UI Toolkit</span>
-          <span class="tag">Addressables</span>
-          <span class="tag">LiveOps</span>
-          <span class="tag">Editor Tooling</span>
-          <span class="tag">Localization</span>
-          <span class="tag">Analytics</span>
-          <span class="tag">UGS</span>
-          <span class="tag">Entitas (ECS)</span>
-          <span class="tag-dim">VFX Graph</span>
-          <span class="tag-dim">Shader Graph</span>
-          <span class="tag-dim">Fish-Net</span>
-          <span class="tag-dim">Relay &amp; Lobby</span>
-          <span class="tag-dim">DOTS / ECS</span>
-          <span class="tag-dim">Netcode for GOs</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <p class="skill-group-label">Platforms</p>
-        <div class="skill-tags">
-          <span class="tag">iOS</span>
-          <span class="tag">Android</span>
-          <span class="tag">PC / Steam</span>
-          <span class="tag">Nintendo Switch</span>
-          <span class="tag">Apple Arcade</span>
-          <span class="tag-dim">Netflix</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <p class="skill-group-label">SDKs & Integrations</p>
-        <div class="skill-tags">
-          <span class="tag">IAP</span>
-          <span class="tag">Firebase</span>
-          <span class="tag">LevelPlay Ads</span>
-          <span class="tag">UGS</span>
-          <span class="tag">Amazon S3</span>
-          <span class="tag-dim">Unity Playworks</span>
-          <span class="tag-dim">WebSockets</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <p class="skill-group-label">DevOps & Tools</p>
-        <div class="skill-tags">
-          <span class="tag">GitHub / GitLab</span>
-          <span class="tag">Jenkins</span>
-          <span class="tag">GitHub Actions</span>
-          <span class="tag">Jira</span>
-          <span class="tag">Confluence</span>
-          <span class="tag">Figma</span>
-          <span class="tag">ClickUp</span>
-          <span class="tag-dim">Docker</span>
-        </div>
-      </div>
-
-      <!-- SOFT SKILLS -->
-      <p class="skill-group-label" style="margin-top:2rem;margin-bottom:1rem">Soft skills</p>
-      <div class="soft-grid">
-        <div class="soft-card">
-          <div class="soft-icon">🏗️</div>
-          <div class="soft-name">Architecture</div>
-          <div class="soft-desc">Defined Unity architecture standards and C# best practices adopted studio-wide at Gear Games.</div>
-        </div>
-        <div class="soft-card">
-          <div class="soft-icon">🧑‍🏫</div>
-          <div class="soft-name">1:1 Mentorship</div>
-          <div class="soft-desc">Led regular 1:1s and mentoring sessions for junior engineers within the team at Gear Games and Nukebox Studios.</div>
-        </div>
-        <div class="soft-card">
-          <div class="soft-icon">🔎</div>
-          <div class="soft-name">Code Reviewer</div>
-          <div class="soft-desc">Enforced Unity architecture and C# standards through structured code reviews across the whole project team, not just my immediate team.</div>
-        </div>
-        <div class="soft-card">
-          <div class="soft-icon">🤝</div>
-          <div class="soft-name">Stakeholder Alignment</div>
-          <div class="soft-desc">Collaborated with Art, Design, Product and senior management to align roadmap priorities and ensure on-time delivery.</div>
-        </div>
-        <div class="soft-card">
-          <div class="soft-icon">📋</div>
-          <div class="soft-name">Agile / Scrum</div>
-          <div class="soft-desc">Ran daily standups, sprint planning and monthly technical improvement plans.</div>
-        </div>
-        <div class="soft-card">
-          <div class="soft-icon">🚢</div>
-          <div class="soft-name">Multi-Platform Delivery</div>
-          <div class="soft-desc">Led porting of Arcane Rush from mobile to Steam and Nintendo Switch simultaneously.</div>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ── CONTACT ───────────────────────────────────── -->
-    <section id="contact" class="contact-section">
-      <p class="sec-label">What's next?</p>
-      <h2>Get in touch</h2>
-      <p>Currently open to new opportunities — preferably 3D but also open to 2D. Got a technical or management problem you're wrestling with? Let's talk it through over a Beer or a Game Night.</p>
-      <a href="mailto:tonoychan55@gmail.com" class="btn-teal">Say hello →</a>
-      <div class="footer-note">
-        <p>Designed &amp; built by Tonoy Chakraborty &amp; Claude</p>
-        <p>Inspired by the Internet</p>
-      </div>
-    </section>
-
-  </main>
-</div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <span>tonoy@dev</span>:~$ echo "designed & built by Tonoy Chakraborty & Claude"
+  </div>
+  <div class="footer-right">
+    <a href="https://github.com/tonoychan" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/tonoy-chakraborty-9b703097" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:tonoychan55@gmail.com">Email</a>
+  </div>
+</footer>
 
 <script>
-function toggleCard(card) {
-  const isOpen = card.classList.contains('open');
-  // close all others
-  document.querySelectorAll('.feat-card.open').forEach(c => c.classList.remove('open'));
-  if (!isOpen) card.classList.add('open');
+function toggleCard(header) {
+  const card = header.closest('.work-card');
+  card.classList.toggle('open');
 }
-function toggleContrib(btn) {
-  const list = document.getElementById('contrib-list');
-  const open = list.classList.toggle('open');
-  btn.classList.toggle('open', open);
-  btn.setAttribute('aria-expanded', open);
-  btn.childNodes[0].textContent = open ? 'Hide games ' : 'Show games ';
-}
-function toggleMore(btn) {
-  const list = document.getElementById('more-list');
-  const open = list.classList.toggle('open');
-  btn.classList.toggle('open', open);
-  btn.setAttribute('aria-expanded', open);
-  btn.childNodes[0].textContent = open ? 'Show less ' : 'Show more ';
-}
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.sidenav a');
-const io = new IntersectionObserver(entries => {
+
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove('active'));
-      const a = document.querySelector(`.sidenav a[href="#${e.target.id}"]`);
-      if (a) a.classList.add('active');
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.25 });
-sections.forEach(s => io.observe(s));
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 0.08 + 's';
+  observer.observe(el);
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
 </script>
 </body>
 </html>
